@@ -11,7 +11,7 @@ class NourEnaikWelcomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BaseScreen(
+    return Scaffold(
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -63,6 +63,7 @@ class NourEnaikWelcomeScreen extends StatelessWidget {
                   color: AppColors.darkBlue.withOpacity(0.75),
                   fontSize: AppFontSizes.kS10),
             ),
+            //TextButton(onPressed: (){}, child: Text("تسجيل الدخول")),
             ButtonBuilder(
               title: 'تسجيل الدخول',
               height: 5.h,

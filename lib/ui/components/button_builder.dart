@@ -71,8 +71,10 @@ class ButtonBuilder extends StatelessWidget {
             prefixIcon ?? const SizedBox(),
             Text(
               title,
-              style: titleStyle ??
-                  AppStyles.kButtonTextStyle.copyWith(color: titleColor),
+              style: TextStyle(
+                  fontSize: 10.w / 3,
+                  fontWeight: FontWeight.bold,
+                  color: AppColors.darkBlue),
             ),
             suffixIcon ?? const SizedBox()
           ],

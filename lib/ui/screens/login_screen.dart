@@ -80,12 +80,12 @@ class NourEnaikLoginScreen extends StatelessWidget {
                           checkColor: AppColors.cyan,
                         ),
                         Text(
-                          AppStrings.kRememberMe,
+                          'تذكرني',
                           style: TextStyle(fontSize: 11.sp),
                         ),
                         const Spacer(),
                         Text(
-                          AppStrings.kForgetPassword,
+                          'نسيت كلمة المرور',
                           style: TextStyle(fontSize: 11.sp),
                         ),
                         SizedBox(
