@@ -15,15 +15,17 @@ class NourEnaikMainScreen extends StatelessWidget {
       onWillPop: () async {
         return await controller.onWillPop(context);
       },
-      child: Scaffold(
-          extendBody: true,
-          backgroundColor: AppColors.liteWight,
-          bottomNavigationBar: BottomNavigator(
-            onChanged: (index) =>
-                controller.onBottomSheetChanged(index, context),
-            index: controller.currentIndex,
-          ),
-          body: controller.homeScreensList[controller.currentIndex]),
+      child: Obx(
+        () => Scaffold(
+            extendBody: true,
+            backgroundColor: AppColors.liteWight,
+            bottomNavigationBar: BottomNavigator(
+              onChanged: (index) =>
+                  controller.onBottomSheetChanged(index, context),
+              index: controller.currentIndex.value,
+            ),
+            body: controller.homeScreensList[controller.currentIndex.value]),
+      ),
     );
   }
 }
