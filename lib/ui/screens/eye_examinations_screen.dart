@@ -1,5 +1,6 @@
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../constants/constants.dart';
@@ -37,11 +38,14 @@ class _EyeExaminationsScreenState extends State<EyeExaminationsScreen> {
                       fontWeight: FontWeight.w800),
                 ),
                 SizedBox(width: 12.5.w),
-                Icon(
-                  Icons.arrow_forward,
-                  color: Colors.white,
-                  size: 25.sp,
-                )
+                GestureDetector(
+                  onTap: () => Get.back(),
+                  child: Icon(
+                    Icons.arrow_forward,
+                    color: Colors.white,
+                    size: 25.sp,
+                  ),
+                ),
               ],
             ),
           ),
@@ -128,10 +132,13 @@ class _EyeExaminationsScreenState extends State<EyeExaminationsScreen> {
                                       bold: true,
                                     ),
                                     const Spacer(),
-                                    Icon(
-                                      Icons.arrow_forward_ios_sharp,
-                                      color: AppColors.darkGray,
-                                      size: 20.sp,
+                                    GestureDetector(
+                                      onTap: () => Get.back(),
+                                      child: Icon(
+                                        Icons.arrow_forward,
+                                        color: AppColors.darkGray,
+                                        size: 25.sp,
+                                      ),
                                     ),
                                     SizedBox(
                                       width: 5.w,
@@ -276,10 +283,13 @@ class _EyeExaminationsScreenState extends State<EyeExaminationsScreen> {
                                           color: AppColors.blue,
                                           width: 25.w,
                                           height: 15.w,
-                                          child: Icon(
-                                            Icons.arrow_forward,
-                                            color: Colors.white,
-                                            size: AppFontSizes.kS10,
+                                          child: GestureDetector(
+                                            onTap: () => Get.back(),
+                                            child: Icon(
+                                              Icons.arrow_forward,
+                                              color: Colors.white,
+                                              size: 25.sp,
+                                            ),
                                           ),
                                         ),
                                       ),

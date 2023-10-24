@@ -31,10 +31,13 @@ class NourEnaikLoginScreen extends StatelessWidget {
                       fontWeight: FontWeight.w800),
                 ),
                 const Spacer(),
-                Icon(
-                  Icons.arrow_forward,
-                  color: Colors.white,
-                  size: 25.sp,
+                GestureDetector(
+                  onTap: () => Get.back(),
+                  child: Icon(
+                    Icons.arrow_forward,
+                    color: Colors.white,
+                    size: 25.sp,
+                  ),
                 ),
               ],
             ),

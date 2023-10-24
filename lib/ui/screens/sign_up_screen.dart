@@ -31,10 +31,13 @@ class NourEnaikSignUpScreen extends StatelessWidget {
                       fontWeight: FontWeight.w800),
                 ),
                 const Spacer(),
-                Icon(
-                  Icons.arrow_forward,
-                  color: Colors.white,
-                  size: 25.sp,
+                GestureDetector(
+                  onTap: () => Get.back(),
+                  child: Icon(
+                    Icons.arrow_forward,
+                    color: Colors.white,
+                    size: 25.sp,
+                  ),
                 ),
               ],
             ),
@@ -152,7 +155,7 @@ class NourEnaikSignUpScreen extends StatelessWidget {
                         height: 9.w,
                         child: Center(
                           child: Text(
-                            'تسجيل الدخول',
+                            'إنشاء حساب',
                             style: TextStyle(
                                 color: Colors.white,
                                 fontSize: AppFontSizes.kS4),

@@ -23,11 +23,11 @@ class MyApp extends StatelessWidget {
           title: AppStrings.kAppName,
           textDirection: TextDirection.rtl,
           debugShowCheckedModeBanner: false,
-          locale: Locale('ar'),
+          locale: const Locale('ar'),
           fallbackLocale: const Locale(
             'en',
           ),
-          home: NourEnaikWelcomeScreen(),
+          home: const NourEnaikWelcomeScreen(),
           theme: ThemeData(
             // This is the theme of your application.
             //
@@ -39,7 +39,7 @@ class MyApp extends StatelessWidget {
             // Notice that the counter didn't reset back to zero; the application
             // is not restarted.
             // fontFamily: 'Tajawal',
-            textTheme: TextTheme(),
+            textTheme: const TextTheme(),
             primarySwatch: Colors.blue,
           ),
         );

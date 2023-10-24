@@ -22,10 +22,13 @@ class EyePressureScreen extends StatelessWidget {
             padding: EdgeInsets.symmetric(horizontal: 5.w),
             child: Row(
               children: [
-                Icon(
-                  Icons.add,
-                  color: Colors.white,
-                  size: 25.sp,
+                GestureDetector(
+                  onTap: () => Get.to(const AddNewReadingScreen()),
+                  child: Icon(
+                    Icons.add,
+                    color: Colors.white,
+                    size: 25.sp,
+                  ),
                 ),
                 const Spacer(),
                 Text(
@@ -36,10 +39,13 @@ class EyePressureScreen extends StatelessWidget {
                       fontWeight: FontWeight.w800),
                 ),
                 const Spacer(),
-                Icon(
-                  Icons.arrow_forward,
-                  color: Colors.white,
-                  size: 25.sp,
+                GestureDetector(
+                  onTap: () => Get.back(),
+                  child: Icon(
+                    Icons.arrow_forward,
+                    color: Colors.white,
+                    size: 25.sp,
+                  ),
                 ),
               ],
             ),

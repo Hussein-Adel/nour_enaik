@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../constants/constants.dart';
@@ -29,10 +30,13 @@ class AddNewReadingScreen extends StatelessWidget {
                       fontWeight: FontWeight.w800),
                 ),
                 const Spacer(),
-                Icon(
-                  Icons.arrow_forward,
-                  color: Colors.white,
-                  size: 25.sp,
+                GestureDetector(
+                  onTap: () => Get.back(),
+                  child: Icon(
+                    Icons.arrow_forward,
+                    color: Colors.white,
+                    size: 25.sp,
+                  ),
                 ),
               ],
             ),
@@ -46,7 +50,7 @@ class AddNewReadingScreen extends StatelessWidget {
                   topRight: Radius.circular(35), topLeft: Radius.circular(35)),
               child: SingleChildScrollView(
                 child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.end,
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     SizedBox(
                       height: 5.h,
@@ -66,8 +70,8 @@ class AddNewReadingScreen extends StatelessWidget {
                       radius: 10,
                       child: CalendarDatePicker(
                           initialDate: DateTime(2022, 12, 17),
-                          firstDate: DateTime(2022, 1, 1),
-                          lastDate: DateTime(2023, 1, 1),
+                          firstDate: DateTime(2012, 1, 1),
+                          lastDate: DateTime(2032, 1, 1),
                           onDateChanged: (value) {}),
                     ),
                     Text(
@@ -83,15 +87,18 @@ class AddNewReadingScreen extends StatelessWidget {
                       shadow: true,
                       radius: 10,
                       child: Row(
-                        mainAxisAlignment: MainAxisAlignment.end,
+                        mainAxisAlignment: MainAxisAlignment.start,
                         children: [
-                          Text(
-                            'مم زئبقي',
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              color: AppColors.darkGray,
-                              fontSize: AppFontSizes.kS4,
-                            ),
+                          const Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Icon(
+                                Icons.keyboard_arrow_up_sharp,
+                              ),
+                              Icon(
+                                Icons.keyboard_arrow_down_sharp,
+                              ),
+                            ],
                           ),
                           Container(
                             margin: EdgeInsets.symmetric(horizontal: 2.5.w),
@@ -109,16 +116,13 @@ class AddNewReadingScreen extends StatelessWidget {
                               ),
                             ),
                           ),
-                          const Column(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Icon(
-                                Icons.keyboard_arrow_up_sharp,
-                              ),
-                              Icon(
-                                Icons.keyboard_arrow_down_sharp,
-                              ),
-                            ],
+                          Text(
+                            'مم زئبقي',
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: AppColors.darkGray,
+                              fontSize: AppFontSizes.kS4,
+                            ),
                           ),
                         ],
                       ),
@@ -132,10 +136,13 @@ class AddNewReadingScreen extends StatelessWidget {
                             color: AppColors.blue,
                             width: 25.w,
                             height: 15.w,
-                            child: Icon(
-                              Icons.arrow_forward,
-                              color: Colors.white,
-                              size: AppFontSizes.kS10,
+                            child: GestureDetector(
+                              onTap: () => Get.back(),
+                              child: Icon(
+                                Icons.arrow_back,
+                                color: Colors.white,
+                                size: 25.sp,
+                              ),
                             ),
                           ),
                         ),

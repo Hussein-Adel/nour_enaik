@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../constants/constants.dart';
@@ -29,11 +30,14 @@ class AlarmScreen extends StatelessWidget {
                       fontWeight: FontWeight.w800),
                 ),
                 SizedBox(width: 12.5.w),
-                Icon(
-                  Icons.arrow_forward,
-                  color: Colors.white,
-                  size: 25.sp,
-                )
+                GestureDetector(
+                  onTap: () => Get.back(),
+                  child: Icon(
+                    Icons.arrow_forward,
+                    color: Colors.white,
+                    size: 25.sp,
+                  ),
+                ),
               ],
             ),
           ),

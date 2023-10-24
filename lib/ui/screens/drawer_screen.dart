@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../constants/constants.dart';
@@ -15,7 +16,7 @@ class DrawerScreen extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           SizedBox(
-            height: 30.h,
+            height: 32.5.h,
             child: Stack(
               children: [
                 EmptyCard(
@@ -32,12 +33,6 @@ class DrawerScreen extends StatelessWidget {
                       ),
                       Row(
                         children: [
-                          Icon(
-                            Icons.menu,
-                            size: 25.sp,
-                            color: Colors.white,
-                          ),
-                          const Spacer(),
                           Padding(
                             padding: EdgeInsets.symmetric(horizontal: 2.5.w),
                             child: Text(
@@ -51,43 +46,53 @@ class DrawerScreen extends StatelessWidget {
                             size: 40.sp,
                             color: Colors.white,
                           ),
+                          const Spacer(),
+                          GestureDetector(
+                            onTap: () => Get.back(),
+                            child: Icon(
+                              Icons.close_rounded,
+                              size: 22.5.sp,
+                              color: Colors.white,
+                            ),
+                          ),
                         ],
                       ),
                       Text(
                         'ماذا يدور في بالك اليوم؟',
                         style: TextStyle(
-                            color: Colors.grey, fontSize: AppFontSizes.kS4),
+                            color: Colors.white60, fontSize: AppFontSizes.kS5),
                       ),
                       SizedBox(
                         height: 1.5.h,
                       ),
-                      Row(
-                        children: [
-                          const Spacer(),
-                          SizedBox(
-                            width: 1.5.w,
-                          ),
-                          const Icon(
-                            Icons.date_range_sharp,
-                            color: Colors.white,
-                          ),
-                          const Text(
-                            '07-JUN-2023',
-                            style: TextStyle(color: Colors.white),
-                          ),
-                          SizedBox(
-                            width: 5.5.w,
-                          ),
-                        ],
-                      )
+                      // Row(
+                      //   children: [
+                      //     const Spacer(),
+                      //     SizedBox(
+                      //       width: 1.5.w,
+                      //     ),
+                      //     const Icon(
+                      //       Icons.date_range_sharp,
+                      //       color: Colors.white,
+                      //     ),
+                      //     const Text(
+                      //       '07-JUN-2023',
+                      //       style: TextStyle(color: Colors.white),
+                      //     ),
+                      //     SizedBox(
+                      //       width: 5.5.w,
+                      //     ),
+                      //   ],
+                      // )
                     ],
                   ),
                 ),
                 PositionedDirectional(
-                  bottom: -2.h,
-                  start: 30.w,
+                  bottom: 0,
+                  start: 22.5.w,
                   child: EmptyCard(
                     height: 5.h,
+                    horizontalPadding: 12.5.w,
                     verticalPadding: 0,
                     shadow: true,
                     child: const Center(
@@ -158,10 +163,14 @@ class DrawerComponent extends StatelessWidget {
                     fontWeight: FontWeight.w700),
               ),
               const Spacer(),
-              const Icon(
-                Icons.arrow_forward_ios_rounded,
-                color: AppColors.darkGray,
-              )
+              GestureDetector(
+                onTap: () => Get.back(),
+                child: Icon(
+                  Icons.arrow_forward,
+                  color: AppColors.darkGray,
+                  size: 25.sp,
+                ),
+              ),
             ],
           ),
         ),

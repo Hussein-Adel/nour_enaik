@@ -23,13 +23,10 @@ class DosingSchedulesScreen extends StatelessWidget {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      GestureDetector(
-                        onTap: () => Get.to(const DrawerScreen()),
-                        child: Icon(
-                          Icons.menu,
-                          size: 25.sp,
-                          color: Colors.white,
-                        ),
+                      Icon(
+                        Icons.add,
+                        size: 25.sp,
+                        color: Colors.white,
                       ),
                       Padding(
                         padding: EdgeInsets.symmetric(horizontal: 2.5.w),
@@ -41,17 +38,27 @@ class DosingSchedulesScreen extends StatelessWidget {
                               fontWeight: FontWeight.bold),
                         ),
                       ),
-                      Icon(
-                        Icons.add,
-                        size: 40.sp,
-                        color: Colors.white,
+                      GestureDetector(
+                        onTap: () => Get.to(const DrawerScreen()),
+                        child: Icon(
+                          Icons.menu,
+                          size: 25.sp,
+                          color: Colors.white,
+                        ),
                       ),
                     ],
                   ),
                 ),
                 Row(
                   children: [
-                    const Spacer(),
+                    SizedBox(width: 5.w),
+                    Text(
+                      'ضبط تلقائي',
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 19.sp,
+                          fontWeight: FontWeight.bold),
+                    ),
                     Padding(
                       padding: EdgeInsets.symmetric(horizontal: 4.w),
                       child: FlutterSwitch(
@@ -66,14 +73,7 @@ class DosingSchedulesScreen extends StatelessWidget {
                         onToggle: (val) {},
                       ),
                     ),
-                    Text(
-                      'ضبط تلقائي',
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 19.sp,
-                          fontWeight: FontWeight.bold),
-                    ),
-                    SizedBox(width: 5.w)
+                    const Spacer(),
                   ],
                 ),
                 const SchedulesItem(),
@@ -105,6 +105,24 @@ class SchedulesItem extends StatelessWidget {
       padding: EdgeInsets.symmetric(vertical: 2.h),
       child: Row(
         children: [
+          Icon(
+            Icons.more_vert_sharp,
+            color: AppColors.lightGrey,
+            size: 22.5.sp,
+          ),
+          Text(
+            'دورزولامول',
+            style: TextStyle(color: Colors.white, fontSize: 13.5.sp),
+          ),
+          const Spacer(),
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 2.5.w),
+            child: Text(
+              '12:00 Am',
+              style: TextStyle(color: Colors.white, fontSize: 13.5.sp),
+            ),
+          ),
+          const Spacer(),
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 4.w),
             child: FlutterSwitch(
@@ -119,24 +137,6 @@ class SchedulesItem extends StatelessWidget {
               onToggle: (val) {},
             ),
           ),
-          const Spacer(),
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 2.5.w),
-            child: Text(
-              '12:00 Am',
-              style: TextStyle(color: Colors.white, fontSize: 13.5.sp),
-            ),
-          ),
-          const Spacer(),
-          Text(
-            'دورزولامول',
-            style: TextStyle(color: Colors.white, fontSize: 13.5.sp),
-          ),
-          Icon(
-            Icons.more_vert_sharp,
-            color: AppColors.lightGrey,
-            size: 22.5.sp,
-          )
         ],
       ),
     );
