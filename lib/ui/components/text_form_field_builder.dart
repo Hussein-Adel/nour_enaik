@@ -34,10 +34,12 @@ class TextFormFieldBuilder extends StatelessWidget {
   final int? lengthTextInput;
   final bool defaultBorder;
   final bool autoFocus;
+  final bool? shadow;
   final TextInputAction? textInputAction;
 
   const TextFormFieldBuilder(
       {Key? key,
+      this.shadow,
       this.hint,
       this.initValue,
       this.controller,
@@ -82,6 +84,16 @@ class TextFormFieldBuilder extends StatelessWidget {
         decoration: BoxDecoration(
           borderRadius: BorderRadius.all(Radius.circular(borderRadius)),
           color: color,
+          boxShadow: shadow == true
+              ? [
+                  BoxShadow(
+                    color: Colors.grey.withOpacity(0.2),
+                    spreadRadius: 7.5,
+                    blurRadius: 7.5,
+                    offset: const Offset(0, 5), // changes position of shadow
+                  ),
+                ]
+              : null,
         ),
         child: Center(
           child: TextFormField(

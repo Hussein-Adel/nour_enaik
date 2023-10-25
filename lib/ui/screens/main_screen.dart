@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:nour_enaik/ui/controllers/controllers.dart';
 
 import '../../../../constants/colors.dart';
+import '../../controllers/controllers.dart';
 import '../components/bottom_navigator.dart';
 
-class NourEnaikMainScreen extends StatelessWidget {
-  NourEnaikMainScreen({Key? key}) : super(key: key);
+class MainScreen extends StatelessWidget {
+  MainScreen({Key? key}) : super(key: key);
   final MainScreenController controller = Get.put(MainScreenController());
 
   @override

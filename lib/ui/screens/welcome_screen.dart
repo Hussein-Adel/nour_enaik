@@ -6,8 +6,8 @@ import '../../constants/constants.dart';
 import '../components/components.dart';
 import 'screens.dart';
 
-class NourEnaikWelcomeScreen extends StatelessWidget {
-  const NourEnaikWelcomeScreen({super.key});
+class WelcomeScreen extends StatelessWidget {
+  const WelcomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -73,7 +73,7 @@ class NourEnaikWelcomeScreen extends StatelessWidget {
               borderColor: Colors.transparent,
               elevation: 7.5,
               margin: EdgeInsets.symmetric(vertical: 2.5.h),
-              onPressed: () => Get.to(const NourEnaikLoginScreen()),
+              onPressed: () => Get.to(NourEnaikLoginScreen()),
             ),
             ButtonBuilder(
               title: 'إنشاء حساب',
@@ -83,7 +83,7 @@ class NourEnaikWelcomeScreen extends StatelessWidget {
               buttonColor: Colors.white,
               borderColor: Colors.transparent,
               elevation: 7.5,
-              onPressed: () => Get.to(const NourEnaikSignUpScreen()),
+              onPressed: () => Get.to(NourEnaikSignUpScreen()),
               margin: EdgeInsets.symmetric(vertical: 2.5.h),
             ),
             SizedBox(

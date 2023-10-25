@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/date_symbol_data_local.dart';
 import 'package:nour_enaik/ui/screens/screens.dart';
 import 'package:sizer/sizer.dart';
 
 import 'constants/constants.dart';
+import 'data/di/locator.dart';
 
-void main() {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await setupLocator();
+  initializeDateFormatting();
 
   runApp(const MyApp());
 }
@@ -27,7 +31,7 @@ class MyApp extends StatelessWidget {
           fallbackLocale: const Locale(
             'en',
           ),
-          home: const NourEnaikWelcomeScreen(),
+          home: const SplashScreen(),
           theme: ThemeData(
             // This is the theme of your application.
             //

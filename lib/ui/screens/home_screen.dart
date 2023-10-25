@@ -116,15 +116,17 @@ class NourEnaikHomeScreen extends StatelessWidget {
                         borderRadius: const BorderRadius.only(
                             topRight: Radius.circular(35),
                             topLeft: Radius.circular(35)),
-                        child: const Row(
+                        child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
                             HomeComponent(
                               image: AppAssets.kMagalEl2bsar,
                               text: 'فحص مجال الأبصار',
-                              page: EyeExaminationsScreen(),
+                              page: EyeExaminationsScreen(
+                                title: 'فحص مجال الأبصار',
+                              ),
                             ),
-                            HomeComponent(
+                            const HomeComponent(
                               image: AppAssets.kEyePressure,
                               text: 'ضغط العين',
                               page: EyePressureScreen(),
@@ -132,7 +134,9 @@ class NourEnaikHomeScreen extends StatelessWidget {
                             HomeComponent(
                               image: AppAssets.kFa7sKa3El3in,
                               text: 'فحص قاع العين',
-                              page: EyeExaminationsScreen(),
+                              page: EyeExaminationsScreen(
+                                title: 'فحص قاع العين',
+                              ),
                             ),
                           ],
                         ),

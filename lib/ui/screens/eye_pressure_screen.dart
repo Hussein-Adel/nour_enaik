@@ -23,7 +23,7 @@ class EyePressureScreen extends StatelessWidget {
             child: Row(
               children: [
                 GestureDetector(
-                  onTap: () => Get.to(const AddNewReadingScreen()),
+                  onTap: () => Get.to(AddNewReadingScreen()),
                   child: Icon(
                     Icons.add,
                     color: Colors.white,
@@ -173,7 +173,7 @@ class EyePressureScreen extends StatelessWidget {
                       min: 0,
                     ),
                     GestureDetector(
-                      onTap: () => Get.to(const AddNewReadingScreen()),
+                      onTap: () => Get.to(AddNewReadingScreen()),
                       child: EmptyCard(
                         verticalPadding: 0,
                         color: AppColors.blue,

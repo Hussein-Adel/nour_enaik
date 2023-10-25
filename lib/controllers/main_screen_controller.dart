@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
-import '../screens/screens.dart';
+import '../ui/screens/screens.dart';
 
 class MainScreenController extends GetxController {
   RxInt currentIndex = 0.obs;
@@ -27,7 +27,7 @@ class MainScreenController extends GetxController {
   List<Widget> homeScreensList = [
     const NourEnaikHomeScreen(),
     const AlarmScreen(),
-    const DosingSchedulesScreen(),
+    DosingSchedulesScreen(),
     const NourEnaikHomeScreen(),
     const NourEnaikHomeScreen(),
   ];

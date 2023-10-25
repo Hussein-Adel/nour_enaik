@@ -1,1 +1,1 @@
-enum EyeExaminations { addPhoto, date, gallery }
+enum EyeExaminationsType { addPhoto, date, gallery }

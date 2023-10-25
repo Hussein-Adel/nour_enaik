@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:sizer/sizer.dart';
@@ -28,7 +27,7 @@ class LoadingWidget extends StatelessWidget {
       verticalPadding: verticalPadding,
       horizontalMargin: horizontalMargin,
       verticalMargin: verticalMargin,
-      color: backgroundColor,
+      color: backgroundColor ?? Colors.transparent,
       height: 50.h,
       child: Center(
         child: LoadingAnimationWidget.threeArchedCircle(
