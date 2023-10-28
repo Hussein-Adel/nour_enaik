@@ -50,36 +50,6 @@ class _AuthenticationClient implements AuthenticationClient {
   }
 
   @override
-  Future<BaseResponse<UserData>> socialLogin(dynamic model) async {
-    const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{};
-    final _data = model;
-    final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<BaseResponse<UserData>>(Options(
-      method: 'POST',
-      headers: _headers,
-      extra: _extra,
-    )
-            .compose(
-              _dio.options,
-              'social-login',
-              queryParameters: queryParameters,
-              data: _data,
-            )
-            .copyWith(
-                baseUrl: _combineBaseUrls(
-              _dio.options.baseUrl,
-              baseUrl,
-            ))));
-    final value = BaseResponse<UserData>.fromJson(
-      _result.data!,
-      (json) => UserData.fromJson(json as Map<String, dynamic>),
-    );
-    return value;
-  }
-
-  @override
   Future<BaseResponse<UserData>> register(dynamic model) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
@@ -154,72 +124,6 @@ class _AuthenticationClient implements AuthenticationClient {
             .compose(
               _dio.options,
               'verify',
-              queryParameters: queryParameters,
-              data: _data,
-            )
-            .copyWith(
-                baseUrl: _combineBaseUrls(
-              _dio.options.baseUrl,
-              baseUrl,
-            ))));
-    final value = BaseResponse<UserData>.fromJson(
-      _result.data!,
-      (json) => UserData.fromJson(json as Map<String, dynamic>),
-    );
-    return value;
-  }
-
-  @override
-  Future<BaseResponse<UserData>> loginOtp(
-    dynamic model,
-    String phone,
-  ) async {
-    const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{};
-    final _data = model;
-    final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<BaseResponse<UserData>>(Options(
-      method: 'POST',
-      headers: _headers,
-      extra: _extra,
-    )
-            .compose(
-              _dio.options,
-              'login-otp/${phone}',
-              queryParameters: queryParameters,
-              data: _data,
-            )
-            .copyWith(
-                baseUrl: _combineBaseUrls(
-              _dio.options.baseUrl,
-              baseUrl,
-            ))));
-    final value = BaseResponse<UserData>.fromJson(
-      _result.data!,
-      (json) => UserData.fromJson(json as Map<String, dynamic>),
-    );
-    return value;
-  }
-
-  @override
-  Future<BaseResponse<UserData>> checkOtp(
-    dynamic model,
-    String email,
-  ) async {
-    const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{};
-    final _data = model;
-    final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<BaseResponse<UserData>>(Options(
-      method: 'POST',
-      headers: _headers,
-      extra: _extra,
-    )
-            .compose(
-              _dio.options,
-              'check-otp/${email}',
               queryParameters: queryParameters,
               data: _data,
             )

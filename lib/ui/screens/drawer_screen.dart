@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:nour_enaik/controllers/controllers.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../constants/constants.dart';
 import '../components/components.dart';
 
 class DrawerScreen extends StatelessWidget {
-  const DrawerScreen({super.key});
-
+  DrawerScreen({super.key});
+  final GeneralController controller = Get.put(GeneralController());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -16,11 +17,11 @@ class DrawerScreen extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           SizedBox(
-            height: 32.5.h,
+            height: 30.h,
             child: Stack(
               children: [
                 EmptyCard(
-                  height: 27.5.h,
+                  height: 25.h,
                   verticalMargin: 0,
                   borderRadius: const BorderRadius.only(
                       bottomLeft: Radius.circular(40),
@@ -57,33 +58,17 @@ class DrawerScreen extends StatelessWidget {
                           ),
                         ],
                       ),
+                      SizedBox(
+                        height: 0.5.h,
+                      ),
                       Text(
                         'ماذا يدور في بالك اليوم؟',
                         style: TextStyle(
                             color: Colors.white60, fontSize: AppFontSizes.kS5),
                       ),
                       SizedBox(
-                        height: 1.5.h,
+                        height: 0.5.h,
                       ),
-                      // Row(
-                      //   children: [
-                      //     const Spacer(),
-                      //     SizedBox(
-                      //       width: 1.5.w,
-                      //     ),
-                      //     const Icon(
-                      //       Icons.date_range_sharp,
-                      //       color: Colors.white,
-                      //     ),
-                      //     const Text(
-                      //       '07-JUN-2023',
-                      //       style: TextStyle(color: Colors.white),
-                      //     ),
-                      //     SizedBox(
-                      //       width: 5.5.w,
-                      //     ),
-                      //   ],
-                      // )
                     ],
                   ),
                 ),
@@ -109,7 +94,7 @@ class DrawerScreen extends StatelessWidget {
           const Spacer(),
           EmptyCard(
             shadow: true,
-            height: 67.5.h,
+            height: 70.h,
             horizontalPadding: 0,
             verticalMargin: 0,
             verticalPadding: 0,
@@ -121,18 +106,19 @@ class DrawerScreen extends StatelessWidget {
                   SizedBox(
                     height: 1.h,
                   ),
-                  const DrawerComponent(text: 'نور عينيك'),
-                  const DrawerComponent(text: 'تذكير بالقطرات'),
-                  const DrawerComponent(text: 'فحوصاتي'),
-                  const DrawerComponent(text: 'نصائح'),
-                  const DrawerComponent(text: 'حسابي'),
-                  const DrawerComponent(text: 'نقاطي'),
-                  const DrawerComponent(text: 'تواصل مع طبيبك'),
-                  const DrawerComponent(text: 'تسجيل الخروج'),
-                  const DrawerComponent(
-                    text: 'عن فاركو',
-                    divider: false,
-                  ),
+                  DrawerComponent(
+                      text: 'نور عينيك', onTap: controller.aboutApp),
+                  DrawerComponent(text: 'تذكير بالقطرات', onTap: () {}),
+                  DrawerComponent(text: 'فحوصاتي', onTap: () {}),
+                  DrawerComponent(text: 'نصائح', onTap: () {}),
+                  DrawerComponent(text: 'حسابي', onTap: () {}),
+                  DrawerComponent(text: 'نقاطي', onTap: () {}),
+                  DrawerComponent(text: 'تواصل مع طبيبك', onTap: () {}),
+                  DrawerComponent(text: 'تسجيل الخروج', onTap: () {}),
+                  DrawerComponent(
+                      text: 'عن فاركو',
+                      divider: false,
+                      onTap: controller.aboutFarco),
                 ],
               ),
             ),
@@ -144,43 +130,48 @@ class DrawerScreen extends StatelessWidget {
 }
 
 class DrawerComponent extends StatelessWidget {
-  const DrawerComponent({super.key, required this.text, this.divider = true});
+  const DrawerComponent(
+      {super.key,
+      required this.text,
+      this.divider = true,
+      required this.onTap});
   final String text;
   final bool? divider;
+  final VoidCallback onTap;
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Padding(
-          padding: EdgeInsets.symmetric(horizontal: 7.5.w, vertical: 1.h),
-          child: Row(
-            children: [
-              Text(
-                text,
-                style: TextStyle(
-                    fontSize: AppFontSizes.kS4,
-                    color: AppColors.darkBlue,
-                    fontWeight: FontWeight.w700),
-              ),
-              const Spacer(),
-              GestureDetector(
-                onTap: () => Get.back(),
-                child: Icon(
+    return GestureDetector(
+      onTap: onTap,
+      child: Column(
+        children: [
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 7.5.w, vertical: 1.h),
+            child: Row(
+              children: [
+                Text(
+                  text,
+                  style: TextStyle(
+                      fontSize: AppFontSizes.kS4,
+                      color: AppColors.darkBlue,
+                      fontWeight: FontWeight.w400),
+                ),
+                const Spacer(),
+                Icon(
                   Icons.arrow_forward,
                   color: AppColors.darkGray,
                   size: 25.sp,
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
-        ),
-        divider!
-            ? DividerBuilder(
-                dividerColor: AppColors.lightGrey2,
-                width: 100.w,
-              )
-            : const SizedBox()
-      ],
+          divider!
+              ? DividerBuilder(
+                  dividerColor: AppColors.lightGrey2,
+                  width: 100.w,
+                )
+              : const SizedBox()
+        ],
+      ),
     );
   }
 }

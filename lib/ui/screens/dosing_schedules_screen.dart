@@ -47,7 +47,7 @@ class DosingSchedulesScreen extends StatelessWidget {
                           ),
                         ),
                         GestureDetector(
-                          onTap: () => Get.to(const DrawerScreen()),
+                          onTap: () => Get.to(DrawerScreen()),
                           child: Icon(
                             Icons.menu,
                             size: 25.sp,

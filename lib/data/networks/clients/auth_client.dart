@@ -16,11 +16,6 @@ abstract class AuthenticationClient {
   Future<BaseResponse<UserData>> login(
     @Body() LoginRequest model,
   );
-  @POST(NetworkConstant.kSocialLoginRequest)
-  Future<BaseResponse<UserData>> socialLogin(
-    @Body() var model,
-  );
-
   @POST(NetworkConstant.kRegisterRequest)
   Future<BaseResponse<UserData>> register(
     @Body() var model,
@@ -33,18 +28,6 @@ abstract class AuthenticationClient {
   @POST(NetworkConstant.kVerify)
   Future<BaseResponse<UserData>> verify(
     @Body() var model,
-  );
-
-  @POST("${NetworkConstant.kLoginOtp}/{phone}")
-  Future<BaseResponse<UserData>> loginOtp(
-    @Body() var model,
-    @Path('phone') String phone,
-  );
-
-  @POST("${NetworkConstant.kCheckOtp}/{email}")
-  Future<BaseResponse<UserData>> checkOtp(
-    @Body() var model,
-    @Path('email') String email,
   );
 
   @POST("${NetworkConstant.kChangePassword}/{email}")

@@ -1,3 +1,4 @@
+export 'about_farco_screen.dart';
 export 'add_new_reading.dart';
 export 'alarm_screen.dart';
 export 'dosing_schedules_screen.dart';

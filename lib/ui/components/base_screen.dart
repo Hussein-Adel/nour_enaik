@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../../constants/assets.dart';
-import 'loading_widget.dart';
+import 'components.dart';
 
 class BaseScreen extends StatelessWidget {
   const BaseScreen({

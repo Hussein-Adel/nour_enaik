@@ -14,11 +14,17 @@ Future setupLocator() async {
   locator.registerFactory(() => AuthenticationClient(
         InjectionClass.dio,
       ));
+  locator.registerFactory(() => GeneralClient(
+        InjectionClass.dio,
+      ));
 
   /// repositories
   locator.registerFactory<AuthenticationRepository>(() =>
       AuthenticationRepository(
           authenticationClient: locator<AuthenticationClient>()));
+
+  locator.registerFactory<GeneralRepository>(
+      () => GeneralRepository(generalClient: locator<GeneralClient>()));
 
   ///Shared preferences
   var instance = await SharedPref.getInstance();
@@ -37,6 +43,5 @@ abstract class InjectionClass {
       'Accept': 'application/json, text/plain, /',
       'X-Requested-With': 'XMLHttpRequest',
       'Content-language': 'ar',
-      'currency': '',
     };
 }

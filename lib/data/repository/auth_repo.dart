@@ -79,23 +79,23 @@ class AuthenticationRepository extends BaseRepository {
     }
   }
 
-  Future<BaseModel<UserData>> checkOtp(var model, String email) async {
-    if (await checkForConnectivity()) {
-      try {
-        return BaseModel(
-            data:
-                await authenticationClient.checkOtp(model, email).then((value) {
-          return value.data;
-        }));
-      } on DioException catch (e) {
-        return BaseModel(error: ErrorResponse(dioException: e));
-      }
-    } else {
-      //Util.kToastNOInternet();
-
-      return BaseModel.noNetworkConnection();
-    }
-  }
+  // Future<BaseModel<UserData>> checkOtp(var model, String email) async {
+  //   if (await checkForConnectivity()) {
+  //     try {
+  //       return BaseModel(
+  //           data:
+  //               await authenticationClient.checkOtp(model, email).then((value) {
+  //         return value.data;
+  //       }));
+  //     } on DioException catch (e) {
+  //       return BaseModel(error: ErrorResponse(dioException: e));
+  //     }
+  //   } else {
+  //     //Util.kToastNOInternet();
+  //
+  //     return BaseModel.noNetworkConnection();
+  //   }
+  // }
 
   Future<BaseModel<dynamic>> changePassword(var model, String email) async {
     if (await checkForConnectivity()) {

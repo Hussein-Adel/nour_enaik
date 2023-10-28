@@ -27,6 +27,11 @@ class NourEnaikHomeScreen extends StatelessWidget {
                 color: Colors.transparent,
                 child: Row(
                   children: [
+                    Icon(
+                      Icons.person_pin,
+                      size: 40.sp,
+                      color: Colors.white,
+                    ),
                     Padding(
                       padding: EdgeInsets.symmetric(horizontal: 2.5.w),
                       child: Text(
@@ -34,14 +39,9 @@ class NourEnaikHomeScreen extends StatelessWidget {
                         style: TextStyle(color: Colors.white, fontSize: 15.sp),
                       ),
                     ),
-                    Icon(
-                      Icons.person_pin,
-                      size: 40.sp,
-                      color: Colors.white,
-                    ),
                     const Spacer(),
                     GestureDetector(
-                      onTap: () => Get.to(const DrawerScreen()),
+                      onTap: () => Get.to(DrawerScreen()),
                       child: Icon(
                         Icons.menu,
                         size: 25.sp,
