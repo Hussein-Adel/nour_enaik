@@ -25,7 +25,8 @@ class GeneralController extends GetxController {
       } else {}
     } on DioException catch (e) {
       Get.showSnackbar(GetSnackBar(
-        title: e.message,
+        title: 'Error',
+        message: e.message,
       ));
     } finally {
       isLoggedIn.value = false;
@@ -50,7 +51,8 @@ class GeneralController extends GetxController {
       }
     } on DioException catch (e) {
       Get.showSnackbar(GetSnackBar(
-        title: e.message,
+        title: 'Error',
+        message: e.message,
       ));
       isLoggedIn.value = false;
       return false;

@@ -9,7 +9,7 @@ class BuilderChart extends StatelessWidget {
   const BuilderChart(
       {Key? key, required this.chartData, required this.max, required this.min})
       : super(key: key);
-  final List<ChartData> chartData;
+  final List<ReadingData> chartData;
   final int max;
   final int min;
   @override
@@ -19,23 +19,20 @@ class BuilderChart extends StatelessWidget {
       verticalMargin: 0,
       child: SfCartesianChart(
         plotAreaBorderWidth: 0,
-        primaryXAxis: NumericAxis(
+        primaryXAxis: CategoryAxis(
             edgeLabelPlacement: EdgeLabelPlacement.shift,
-            maximum: chartData[chartData.length - 1].x.toDouble() + 10,
-            minimum: 0,
-            interval: 10,
             majorGridLines: const MajorGridLines(width: 0)),
         primaryYAxis: NumericAxis(
             maximum: max.toDouble(),
             minimum: min.toDouble(),
             axisLine: const AxisLine(width: 0),
             majorTickLines: const MajorTickLines(color: AppColors.darkGray)),
-        series: <LineSeries<ChartData, num>>[
-          LineSeries<ChartData, num>(
+        series: <LineSeries<ReadingData, String>>[
+          LineSeries<ReadingData, String>(
             color: AppColors.liteBlue,
             dataSource: chartData,
-            xValueMapper: (ChartData sales, _) => sales.x,
-            yValueMapper: (ChartData sales, _) => sales.y,
+            xValueMapper: (ReadingData sales, _) => sales.date,
+            yValueMapper: (ReadingData sales, _) => sales.reading,
             width: 2,
             markerSettings:
                 const MarkerSettings(isVisible: true, color: AppColors.white),
@@ -46,8 +43,9 @@ class BuilderChart extends StatelessWidget {
   }
 }
 
-class ChartData {
-  ChartData(this.x, this.y);
-  final double x;
-  int y;
+class ReadingData {
+  ReadingData(this.date, this.reading);
+
+  final String date;
+  final int reading;
 }

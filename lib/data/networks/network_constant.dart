@@ -23,6 +23,10 @@ class NetworkConstant {
   static const String kRegisterRequest = "register";
   static const String kAboutFarco = "farco";
   static const String kAboutApp = "about";
+  static const String kEyePressure = "eye_pressure";
+  static const String kEyeSight = "eye_Sight";
+  static const String kStore = "store";
+
   static const String kSendOtp = "send-otp";
   static const String kVerify = "verify";
   static const String kChangePassword = "change-password";

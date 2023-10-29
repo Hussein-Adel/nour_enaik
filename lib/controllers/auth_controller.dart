@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:get/get.dart';
+import 'package:nour_enaik/ui/screens/screens.dart';
 
 import '../data/di/locator.dart';
 import '../data/models/response/response.dart';
@@ -38,9 +39,17 @@ class AuthController extends GetxController {
         currentUser = result.data;
         return Success(result.data!);
       } else {
+        Get.showSnackbar(GetSnackBar(
+          title: 'error',
+          message: '${result.error?.message}',
+        ));
         return Error(errorMessage: result.error?.message);
       }
     } on DioException catch (e) {
+      Get.showSnackbar(GetSnackBar(
+        title: 'DioException error',
+        message: '${e.message}',
+      ));
       return Error(errorMessage: DioExceptions.fromDioError(e).message);
     } finally {
       //Dismiss Dialog .
@@ -61,13 +70,27 @@ class AuthController extends GetxController {
         currentUser = result.data;
         return Success(result.data!);
       } else {
+        Get.showSnackbar(GetSnackBar(
+          title: 'error',
+          message: '${result.error?.message}',
+        ));
         return Error(errorMessage: result.error?.message);
       }
     } on DioException catch (e) {
+      Get.showSnackbar(GetSnackBar(
+        title: 'DioException error',
+        message: '${e.message}',
+      ));
       return Error(errorMessage: DioExceptions.fromDioError(e).message);
     } finally {
       //Dismiss Dialog .
       // Get.back();
     }
+  }
+
+  void logout() {
+    currentUser = null;
+    _sharedPref.deleteLoginInfo();
+    Get.offAll(const WelcomeScreen());
   }
 }

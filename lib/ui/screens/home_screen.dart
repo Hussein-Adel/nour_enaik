@@ -126,7 +126,7 @@ class NourEnaikHomeScreen extends StatelessWidget {
                                 title: 'فحص مجال الأبصار',
                               ),
                             ),
-                            const HomeComponent(
+                            HomeComponent(
                               image: AppAssets.kEyePressure,
                               text: 'ضغط العين',
                               page: EyePressureScreen(),

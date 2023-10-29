@@ -17,9 +17,7 @@ abstract class AuthenticationClient {
     @Body() LoginRequest model,
   );
   @POST(NetworkConstant.kRegisterRequest)
-  Future<BaseResponse<UserData>> register(
-    @Body() var model,
-  );
+  Future<BaseResponse<UserData>> register(@Body() var model);
 
   @POST(NetworkConstant.kSendOtp)
   Future<BaseResponse<String>> sendOtp(

@@ -8,12 +8,13 @@ import '../components/components.dart';
 
 class AddNewReadingScreen extends StatelessWidget {
   AddNewReadingScreen({super.key});
-  final EyePressureController controller = Get.put(EyePressureController());
+  final EyePressureController controller = Get.find();
 
   @override
   Widget build(BuildContext context) {
     return Obx(
       () => BaseScreen(
+        isLoading: controller.isLoggedIn.value,
         verticalPadding: 0,
         body: Column(
           children: [
@@ -76,7 +77,7 @@ class AddNewReadingScreen extends StatelessWidget {
                             initialDate: DateTime(2022, 12, 17),
                             firstDate: DateTime(2012, 1, 1),
                             lastDate: DateTime(2032, 1, 1),
-                            onDateChanged: (value) {}),
+                            onDateChanged: controller.onDateChangedDate),
                       ),
                       Text(
                         'القراءة',
@@ -104,7 +105,7 @@ class AddNewReadingScreen extends StatelessWidget {
                                 ),
                                 GestureDetector(
                                   onTap: () => controller.minusCount(),
-                                  child: Icon(
+                                  child: const Icon(
                                     Icons.keyboard_arrow_down_sharp,
                                   ),
                                 ),
@@ -147,7 +148,7 @@ class AddNewReadingScreen extends StatelessWidget {
                               width: 25.w,
                               height: 15.w,
                               child: GestureDetector(
-                                onTap: () => Get.back(),
+                                onTap: () => controller.storeEyePressure(),
                                 child: Icon(
                                   Icons.arrow_back,
                                   color: Colors.white,

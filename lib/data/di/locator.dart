@@ -17,6 +17,9 @@ Future setupLocator() async {
   locator.registerFactory(() => GeneralClient(
         InjectionClass.dio,
       ));
+  locator.registerFactory(() => EyeClient(
+        InjectionClass.dio,
+      ));
 
   /// repositories
   locator.registerFactory<AuthenticationRepository>(() =>
@@ -25,6 +28,9 @@ Future setupLocator() async {
 
   locator.registerFactory<GeneralRepository>(
       () => GeneralRepository(generalClient: locator<GeneralClient>()));
+
+  locator.registerFactory<EyeRepository>(
+      () => EyeRepository(eyeClient: locator<EyeClient>()));
 
   ///Shared preferences
   var instance = await SharedPref.getInstance();

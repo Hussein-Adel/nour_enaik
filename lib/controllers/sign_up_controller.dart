@@ -51,8 +51,6 @@ class SignUpController extends AuthController {
       return true;
     } else {
       isLoading.value = false;
-      print("xax= ${result}");
-
       return false;
     }
   }

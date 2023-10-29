@@ -9,6 +9,7 @@ import '../components/components.dart';
 class DrawerScreen extends StatelessWidget {
   DrawerScreen({super.key});
   final GeneralController controller = Get.put(GeneralController());
+  final AuthController authController = Get.find();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -114,7 +115,8 @@ class DrawerScreen extends StatelessWidget {
                   DrawerComponent(text: 'حسابي', onTap: () {}),
                   DrawerComponent(text: 'نقاطي', onTap: () {}),
                   DrawerComponent(text: 'تواصل مع طبيبك', onTap: () {}),
-                  DrawerComponent(text: 'تسجيل الخروج', onTap: () {}),
+                  DrawerComponent(
+                      text: 'تسجيل الخروج', onTap: authController.logout),
                   DrawerComponent(
                       text: 'عن فاركو',
                       divider: false,
