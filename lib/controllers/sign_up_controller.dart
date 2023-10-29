@@ -51,10 +51,8 @@ class SignUpController extends AuthController {
       return true;
     } else {
       isLoading.value = false;
-      if (context.mounted) {
-        // Util.showSnackBar(context,
-        //     message: (result as Error<UserData?>).errorMessage);
-      }
+      print("xax= ${result}");
+
       return false;
     }
   }

@@ -44,7 +44,6 @@ class ErrorResponse {
     statusCode = dioException?.response?.statusCode;
     Map<String, dynamic>? errorData = dioException?.response?.data['errors'];
     List? errorsList = errorData?.values.map((e) => e.first).toList();
-
     message = statusCode == 422
         ? errorsList?.first
         : dioException?.response?.data['error'];
