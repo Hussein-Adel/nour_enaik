@@ -2,12 +2,14 @@ class EyeSightModel {
   int? id;
   String? userId;
   String? date;
+  String? images;
   String? notes;
 
   EyeSightModel({
     this.id,
     this.userId,
     this.date,
+    this.images,
     this.notes,
   });
 
@@ -15,6 +17,7 @@ class EyeSightModel {
     id = json['id'];
     userId = json['user_id'];
     date = json['date'];
+    images = json['images'];
     notes = json['notes'];
   }
 
@@ -23,6 +26,7 @@ class EyeSightModel {
     data['id'] = id;
     data['user_id'] = userId;
     data['date'] = date;
+    data['images'] = images;
     data['notes'] = notes;
     return data;
   }

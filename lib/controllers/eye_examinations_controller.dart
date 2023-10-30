@@ -1,5 +1,8 @@
+import 'package:dio/dio.dart' as dio;
 import 'package:dio/dio.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
 
 import '../constants/constants.dart';
 import '../data/di/locator.dart';
@@ -10,8 +13,26 @@ class EyeExaminationsController extends GetxController {
   RxList<EyeSightModel> eyeSightsList = <EyeSightModel>[].obs;
   final _eyeRepository = locator<EyeRepository>();
   RxBool isLoggedIn = false.obs;
-
+  String? date;
   Rx<EyeExaminationsType> eyeExaminations = EyeExaminationsType.date.obs;
+  RxList<XFile> pickedImages = <XFile>[].obs;
+  final ImagePicker _picker = ImagePicker();
+
+  void onDateChangedDate(DateTime value) {
+    date = '${value.day}-${value.month}-${value.year}';
+  }
+
+  TextEditingController notesControllers = TextEditingController();
+  deleteImage(int index) {
+    pickedImages.removeAt(index);
+  }
+
+  getMultiImageFromGallery() async {
+    List<XFile> images = await _picker.pickMultiImage();
+    if (images.isNotEmpty) {
+      pickedImages.addAll(images);
+    }
+  }
 
   changeEyeExaminationsType(EyeExaminationsType type) {
     eyeExaminations.value = type;
@@ -45,10 +66,15 @@ class EyeExaminationsController extends GetxController {
   void storeEyeSight() async {
     isLoggedIn.value = true;
     try {
-      var data = {
-        'date': '',
-        'notes': '',
-      };
+      var data = dio.FormData.fromMap({
+        'date': date ?? '-7-2022',
+        'notes': notesControllers.text,
+        'images': pickedImages
+            .map((e) => dio.MultipartFile.fromFileSync(
+                  e.path, /*filename: e.path.split('/').last*/
+                ))
+            .toList(),
+      });
       final result = await _eyeRepository.storeEyeSight(data);
       if (result.data != null) {
         isLoggedIn.value = false;
