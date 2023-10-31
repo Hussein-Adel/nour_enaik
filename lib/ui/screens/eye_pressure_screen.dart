@@ -9,7 +9,7 @@ import 'screens.dart';
 
 class EyePressureScreen extends StatelessWidget {
   EyePressureScreen({super.key});
-  final EyePressureController controller = Get.put(EyePressureController());
+  final EyePressureController controller = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -181,7 +181,7 @@ class EyePressureScreen extends StatelessWidget {
                         //   ReadingData('November', 30),
                         //   ReadingData('December', 5),
                         // ],
-                        max: 35,
+                        max: 60,
                         min: 0,
                       ),
                       GestureDetector(

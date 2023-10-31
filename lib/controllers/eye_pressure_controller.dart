@@ -30,8 +30,20 @@ class EyePressureController extends GetxController {
     try {
       final result = await _eyeRepository.getEyePressure();
       if (result.data != null) {
+        eyePressuresList.clear();
+        chartDataList.clear();
         isLoggedIn.value = false;
         eyePressuresList.value = result.data!;
+        eyePressuresList.value.forEach((element) {
+          if (element.date != null && element.reading != null) {
+            chartDataList.add(
+              ReadingData(
+                element.date!.split('-').first,
+                int.parse(element.reading!),
+              ),
+            );
+          }
+        });
       } else {
         Get.showSnackbar(GetSnackBar(
           title: 'Error',
@@ -59,6 +71,7 @@ class EyePressureController extends GetxController {
       };
       final result = await _eyeRepository.storeEyePressure(data);
       if (result.data != null) {
+        eyePressuresList.clear();
         isLoggedIn.value = false;
         eyePressuresList.value = result.data!;
         eyePressuresList.value.forEach((element) {

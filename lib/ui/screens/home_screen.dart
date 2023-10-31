@@ -3,11 +3,16 @@ import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../constants/constants.dart';
+import '../../controllers/controllers.dart';
 import '../components/components.dart';
 import 'screens.dart';
 
-class NourEnaikHomeScreen extends StatelessWidget {
-  const NourEnaikHomeScreen({super.key});
+class HomeScreen extends StatelessWidget {
+  HomeScreen({super.key});
+  final EyePressureController pressureController =
+      Get.put(EyePressureController());
+  final EyeExaminationsController examinationsController =
+      Get.put(EyeExaminationsController());
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +27,7 @@ class NourEnaikHomeScreen extends StatelessWidget {
           ),
           child: Column(
             children: [
-              SizedBox(height: 4.h),
+              SizedBox(height: 2.5.h),
               EmptyCard(
                 color: Colors.transparent,
                 child: Row(
@@ -76,7 +81,7 @@ class NourEnaikHomeScreen extends StatelessWidget {
                 margin: EdgeInsets.symmetric(vertical: 4.h),
               ),
               SizedBox(
-                height: 3.h,
+                height: 2.h,
               ),
               Container(
                 height: 57.h,
@@ -123,20 +128,24 @@ class NourEnaikHomeScreen extends StatelessWidget {
                               image: AppAssets.kMagalEl2bsar,
                               text: 'فحص مجال الأبصار',
                               page: EyeExaminationsScreen(
-                                title: 'فحص مجال الأبصار',
-                              ),
+                                  title: 'فحص مجال الأبصار'),
+                              onTap: () {
+                                examinationsController.getEyeSight();},
                             ),
                             HomeComponent(
                               image: AppAssets.kEyePressure,
                               text: 'ضغط العين',
                               page: EyePressureScreen(),
+                              onTap: () {
+                                pressureController.getEyePressure();
+                              },
                             ),
                             HomeComponent(
                               image: AppAssets.kFa7sKa3El3in,
                               text: 'فحص قاع العين',
-                              page: EyeExaminationsScreen(
-                                title: 'فحص قاع العين',
-                              ),
+                              page:
+                                  EyeExaminationsScreen(title: 'فحص قاع العين'),
+                              onTap: () {},
                             ),
                           ],
                         ),
@@ -155,15 +164,23 @@ class NourEnaikHomeScreen extends StatelessWidget {
 
 class HomeComponent extends StatelessWidget {
   const HomeComponent(
-      {super.key, required this.text, required this.image, required this.page});
+      {super.key,
+      required this.text,
+      required this.image,
+      required this.page,
+      required this.onTap});
   final String text;
   final String image;
   final Widget page;
+  final Function() onTap;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => Get.to(page),
+      onTap: () {
+        onTap();
+        Get.to(page);
+      },
       child: Column(
         children: [
           EmptyCard(

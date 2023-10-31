@@ -77,6 +77,7 @@ class NourEnaikLoginScreen extends StatelessWidget {
                                 validator: Validators.required('required'),
                                 horizontalMargin: 7.5.w,
                                 height: 5.h,
+                                keyboardType: TextInputType.emailAddress,
                                 controller: controller.emailController,
                               ),
                               TextFormFieldBuilder(

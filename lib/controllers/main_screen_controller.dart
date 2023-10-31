@@ -25,10 +25,10 @@ class MainScreenController extends GetxController {
   }
 
   List<Widget> homeScreensList = [
-    const NourEnaikHomeScreen(),
+    HomeScreen(),
     const AlarmScreen(),
     DosingSchedulesScreen(),
-    const NourEnaikHomeScreen(),
-    const NourEnaikHomeScreen(),
+    HomeScreen(),
+    HomeScreen(),
   ];
 }

@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 
+import '../../utils/util.dart';
 import '../models/request/request.dart';
 import '../models/response/response.dart';
 import '../networks/base_model.dart';
@@ -39,7 +40,7 @@ class AuthenticationRepository extends BaseRepository {
         return BaseModel(error: ErrorResponse(dioException: e));
       }
     } else {
-      // Util.kToastNOInternet();
+      Util.kToastNOInternet();
 
       return BaseModel.noNetworkConnection();
     }
@@ -56,7 +57,7 @@ class AuthenticationRepository extends BaseRepository {
         return BaseModel(error: ErrorResponse(dioException: e));
       }
     } else {
-      //Util.kToastNOInternet();
+      Util.kToastNOInternet();
 
       return BaseModel.noNetworkConnection();
     }
@@ -73,7 +74,7 @@ class AuthenticationRepository extends BaseRepository {
         return BaseModel(error: ErrorResponse(dioException: e));
       }
     } else {
-      //Util.kToastNOInternet();
+      Util.kToastNOInternet();
 
       return BaseModel.noNetworkConnection();
     }
@@ -110,7 +111,7 @@ class AuthenticationRepository extends BaseRepository {
         return BaseModel(error: ErrorResponse(dioException: e));
       }
     } else {
-      //Util.kToastNOInternet();
+      Util.kToastNOInternet();
 
       return BaseModel.noNetworkConnection();
     }
@@ -127,7 +128,7 @@ class AuthenticationRepository extends BaseRepository {
         return BaseModel(error: ErrorResponse(dioException: e));
       }
     } else {
-      // Util.kToastNOInternet();
+      Util.kToastNOInternet();
 
       return BaseModel.noNetworkConnection();
     }
@@ -145,7 +146,7 @@ class AuthenticationRepository extends BaseRepository {
         return BaseModel(error: ErrorResponse(dioException: e));
       }
     } else {
-      // Util.kToastNOInternet();
+      Util.kToastNOInternet();
 
       return BaseModel.noNetworkConnection();
     }

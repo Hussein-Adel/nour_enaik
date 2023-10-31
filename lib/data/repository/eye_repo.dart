@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 
+import '../../utils/util.dart';
 import '../models/response/response.dart';
 import '../networks/base_model.dart';
 import '../networks/clients/clients.dart';
@@ -21,7 +22,7 @@ class EyeRepository extends BaseRepository {
         return BaseModel(error: ErrorResponse(dioException: e));
       }
     } else {
-      //Util.kToastNOInternet();
+      Util.kToastNOInternet();
 
       return BaseModel.noNetworkConnection();
     }
@@ -38,7 +39,7 @@ class EyeRepository extends BaseRepository {
         return BaseModel(error: ErrorResponse(dioException: e));
       }
     } else {
-      //Util.kToastNOInternet();
+      Util.kToastNOInternet();
 
       return BaseModel.noNetworkConnection();
     }
@@ -55,7 +56,7 @@ class EyeRepository extends BaseRepository {
         return BaseModel(error: ErrorResponse(dioException: e));
       }
     } else {
-      //Util.kToastNOInternet();
+      Util.kToastNOInternet();
 
       return BaseModel.noNetworkConnection();
     }
@@ -72,7 +73,7 @@ class EyeRepository extends BaseRepository {
         return BaseModel(error: ErrorResponse(dioException: e));
       }
     } else {
-      //Util.kToastNOInternet();
+      Util.kToastNOInternet();
 
       return BaseModel.noNetworkConnection();
     }

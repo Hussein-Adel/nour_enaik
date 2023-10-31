@@ -48,6 +48,7 @@ dependencies:
   icons_launcher: ^2.1.4
   image_picker: ^0.8.6+1
   full_screen_image: ^2.0.0
+  fluttertoast: ^8.1.2
 
 
   # The following adds the Cupertino Icons font to your application.
