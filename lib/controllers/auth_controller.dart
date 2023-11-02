@@ -89,7 +89,7 @@ class AuthController extends GetxController {
   }
 
   void logout() {
-    currentUser = null;
+    currentUser = UserData();
     _sharedPref.deleteLoginInfo();
     Get.offAll(const WelcomeScreen());
   }

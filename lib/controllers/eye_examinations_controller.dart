@@ -3,6 +3,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:intl/intl.dart';
 
 import '../constants/constants.dart';
 import '../data/di/locator.dart';
@@ -19,7 +20,9 @@ class EyeExaminationsController extends GetxController {
   final ImagePicker _picker = ImagePicker();
 
   void onDateChangedDate(DateTime value) {
-    date = '${value.day}-${value.month}-${value.year}';
+    DateFormat format = DateFormat("dd MMMM yyyy");
+    date = format.format(value);
+    print("new Format $date");
   }
 
   TextEditingController notesControllers = TextEditingController();

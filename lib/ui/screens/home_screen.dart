@@ -8,12 +8,15 @@ import '../components/components.dart';
 import 'screens.dart';
 
 class HomeScreen extends StatelessWidget {
-  HomeScreen({super.key});
+  HomeScreen({
+    super.key,
+  });
+
   final EyePressureController pressureController =
       Get.put(EyePressureController());
   final EyeExaminationsController examinationsController =
       Get.put(EyeExaminationsController());
-
+  final authController = Get.find<AuthController>();
   @override
   Widget build(BuildContext context) {
     return BaseScreen(
@@ -40,7 +43,7 @@ class HomeScreen extends StatelessWidget {
                     Padding(
                       padding: EdgeInsets.symmetric(horizontal: 2.5.w),
                       child: Text(
-                        'اهلا هاجر',
+                        'اهلا ${authController.currentUser?.user?.name}',
                         style: TextStyle(color: Colors.white, fontSize: 15.sp),
                       ),
                     ),
@@ -101,7 +104,7 @@ class HomeScreen extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
                           const Text(
-                            ': يمكنك البدء من خلال إختيار أحد الأختيارات التالية',
+                            'يمكنك البدء من خلال إختيار أحد الأختيارات التالية :',
                           ),
                           SizedBox(
                             height: 2.h,
@@ -130,7 +133,8 @@ class HomeScreen extends StatelessWidget {
                               page: EyeExaminationsScreen(
                                   title: 'فحص مجال الأبصار'),
                               onTap: () {
-                                examinationsController.getEyeSight();},
+                                examinationsController.getEyeSight();
+                              },
                             ),
                             HomeComponent(
                               image: AppAssets.kEyePressure,

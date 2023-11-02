@@ -12,6 +12,7 @@ class AddNewReadingScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var nowDate = DateTime.now();
     return Obx(
       () => BaseScreen(
         isLoading: controller.isLoggedIn.value,
@@ -74,9 +75,10 @@ class AddNewReadingScreen extends StatelessWidget {
                         shadow: true,
                         radius: 10,
                         child: CalendarDatePicker(
-                            initialDate: DateTime(2022, 12, 17),
-                            firstDate: DateTime(2012, 1, 1),
-                            lastDate: DateTime(2032, 1, 1),
+                            initialDate: DateTime.now(),
+                            firstDate: DateTime.now(),
+                            lastDate: DateTime(
+                                nowDate.year + 1, nowDate.month, nowDate.day),
                             onDateChanged: controller.onDateChangedDate),
                       ),
                       Text(

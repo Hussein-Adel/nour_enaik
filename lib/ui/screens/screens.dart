@@ -1,10 +1,10 @@
 export 'about_farco_screen.dart';
-export 'add_new_reading.dart';
+export 'add_new_reading_screen.dart';
 export 'alarm_screen.dart';
 export 'dosing_schedules_screen.dart';
 export 'drawer_screen.dart';
-export 'eye_examinations/add_eye_examination.dart';
-export 'eye_examinations/eye_examinations_dates.dart';
+export 'eye_examinations/add_eye_examination_screen.dart';
+export 'eye_examinations/eye_examinations_dates_screen.dart';
 export 'eye_examinations/eye_examinations_screen.dart';
 export 'eye_pressure_screen.dart';
 export 'home_screen.dart';

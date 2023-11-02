@@ -15,6 +15,8 @@ class AddEyeExamination extends StatelessWidget {
   final EyeExaminationsController controller = Get.find();
   @override
   Widget build(BuildContext context) {
+    var nowDate = DateTime.now();
+
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 5.w),
       child: Obx(
@@ -147,9 +149,10 @@ class AddEyeExamination extends StatelessWidget {
               shadow: true,
               radius: 10,
               child: CalendarDatePicker(
-                  initialDate: DateTime(2023, 10, 17),
-                  firstDate: DateTime(2022, 1, 1),
-                  lastDate: DateTime(2025, 1, 1),
+                  initialDate: DateTime.now(),
+                  firstDate: DateTime.now(),
+                  lastDate:
+                      DateTime(nowDate.year + 1, nowDate.month, nowDate.day),
                   onDateChanged: controller.onDateChangedDate),
             ),
             Row(

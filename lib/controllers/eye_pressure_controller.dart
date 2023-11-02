@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 
 import '../data/di/locator.dart';
 import '../data/models/response/response.dart';
@@ -13,6 +14,7 @@ class EyePressureController extends GetxController {
   RxBool isLoggedIn = false.obs;
   String? date;
   RxInt count = 0.obs;
+  DateFormat format = DateFormat("dd MMMM yyyy");
   addCount() {
     count.value = count.value + 1;
   }
@@ -22,7 +24,10 @@ class EyePressureController extends GetxController {
   }
 
   void onDateChangedDate(DateTime value) {
-    date = '${value.day}-${value.month}-${value.year}';
+    date = format.format(value);
+    List<String> x = date!.split(' ');
+    print("new Format $date");
+    print("old Format ${x[1]}");
   }
 
   void getEyePressure() async {
@@ -34,15 +39,19 @@ class EyePressureController extends GetxController {
         chartDataList.clear();
         isLoggedIn.value = false;
         eyePressuresList.value = result.data!;
-        eyePressuresList.value.forEach((element) {
-          if (element.date != null && element.reading != null) {
+        eyePressuresList.value.forEach((eyePressure) {
+          if (eyePressure.date != null && eyePressure.reading != null) {
+            List<String> readingDate = eyePressure.date!.split(' ');
             chartDataList.add(
               ReadingData(
-                element.date!.split('-').first,
-                int.parse(element.reading!),
+                readingDate[1],
+                int.parse(eyePressure.reading!),
               ),
             );
           }
+        });
+        chartDataList.forEach((element) {
+          print(element.date);
         });
       } else {
         Get.showSnackbar(GetSnackBar(
@@ -66,27 +75,29 @@ class EyePressureController extends GetxController {
     isLoggedIn.value = true;
     try {
       var data = {
-        'date': date ?? '-7-2022',
+        'date': date ?? '',
         'reading': '${count.value}',
       };
       final result = await _eyeRepository.storeEyePressure(data);
       if (result.data != null) {
         eyePressuresList.clear();
+        chartDataList.clear();
         isLoggedIn.value = false;
         eyePressuresList.value = result.data!;
-        eyePressuresList.value.forEach((element) {
-          if (element.date != null && element.reading != null) {
+        eyePressuresList.value.forEach((eyePressure) {
+          if (eyePressure.date != null && eyePressure.reading != null) {
+            List<String> readingDate = eyePressure.date!.split(' ');
             chartDataList.add(
               ReadingData(
-                element.date!.split('-').first,
-                int.parse(element.reading!),
+                readingDate[1],
+                int.parse(eyePressure.reading!),
               ),
             );
           }
         });
-        // chartDataList.forEach((element) {
-        //   print('${element.x} :${element.y}');
-        // });
+        chartDataList.forEach((element) {
+          print('${element.reading} :${element.date}');
+        });
         Get.back();
       } else {
         Get.showSnackbar(GetSnackBar(

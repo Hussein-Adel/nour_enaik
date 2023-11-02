@@ -33,6 +33,7 @@ class LoginController extends AuthController {
         password: passwordController.text,
         token: '');
     final result = await login(body: data);
+
     if (result is Success<UserData>) {
       isLoading.value = false;
       return true;

@@ -117,7 +117,7 @@ class NourEnaikLoginScreen extends StatelessWidget {
                         onTap: () async {
                           var isSuccess =
                               await controller.loginWithEmail(context);
-                          isSuccess ? Get.to(MainScreen()) : null;
+                          isSuccess ? Get.to(() => MainScreen()) : null;
                         },
                         child: EmptyCard(
                           verticalPadding: 0,

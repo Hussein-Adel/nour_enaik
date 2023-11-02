@@ -71,7 +71,7 @@ class _SplashScreenState extends State<SplashScreen>
           } else {
             Get.to(const WelcomeScreen());
           }
-        } else {}
+        }
       },
     );
   }
