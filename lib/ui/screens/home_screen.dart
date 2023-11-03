@@ -16,7 +16,7 @@ class HomeScreen extends StatelessWidget {
       Get.put(EyePressureController());
   final EyeExaminationsController examinationsController =
       Get.put(EyeExaminationsController());
-  final authController = Get.find<AuthController>();
+  final AuthController authController = Get.find();
   @override
   Widget build(BuildContext context) {
     return BaseScreen(

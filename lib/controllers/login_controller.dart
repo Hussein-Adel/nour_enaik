@@ -35,6 +35,8 @@ class LoginController extends AuthController {
     final result = await login(body: data);
 
     if (result is Success<UserData>) {
+      AuthController authController = Get.find();
+      authController.currentUser = currentUser;
       isLoading.value = false;
       return true;
     } else {

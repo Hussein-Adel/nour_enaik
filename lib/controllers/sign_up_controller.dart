@@ -1,4 +1,3 @@
-import 'package:dio/dio.dart' as dio;
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -36,7 +35,7 @@ class SignUpController extends AuthController {
     isLoading.value = true;
     FocusScope.of(context).unfocus();
     // String? firebaseToken = await FirebaseMessaging.instance.getToken();
-    var data = dio.FormData.fromMap({
+    var data = {
       'name': fullNameController.text,
       'phone': phoneController.text,
       'email': emailController.text,
@@ -44,10 +43,12 @@ class SignUpController extends AuthController {
       'c_password': confirmPasswordController.text,
       'doctor_name': doctorNameController.text,
       'fcm_token': '',
-    });
+    };
     final result = await signUp(body: data);
     if (result is Success<UserData>) {
       isLoading.value = false;
+      AuthController authController = Get.find();
+      authController.currentUser = currentUser;
       return true;
     } else {
       isLoading.value = false;
