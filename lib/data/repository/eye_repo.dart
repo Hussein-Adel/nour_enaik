@@ -78,4 +78,38 @@ class EyeRepository extends BaseRepository {
       return BaseModel.noNetworkConnection();
     }
   }
+
+  Future<BaseModel<List<EyeSightModel>>> getEyeFundus() async {
+    if (await checkForConnectivity()) {
+      try {
+        return BaseModel(
+            data: await eyeClient.getEyeFundus().then((value) {
+          return value.data;
+        }));
+      } on DioException catch (e) {
+        return BaseModel(error: ErrorResponse(dioException: e));
+      }
+    } else {
+      Util.kToastNOInternet();
+
+      return BaseModel.noNetworkConnection();
+    }
+  }
+
+  Future<BaseModel<List<EyeSightModel>>> storeEyeFundus(var data) async {
+    if (await checkForConnectivity()) {
+      try {
+        return BaseModel(
+            data: await eyeClient.storeEyeFundus(data).then((value) {
+          return value.data;
+        }));
+      } on DioException catch (e) {
+        return BaseModel(error: ErrorResponse(dioException: e));
+      }
+    } else {
+      Util.kToastNOInternet();
+
+      return BaseModel.noNetworkConnection();
+    }
+  }
 }

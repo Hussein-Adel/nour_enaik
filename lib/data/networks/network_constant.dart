@@ -6,6 +6,7 @@ class NetworkConstant {
 
   static const _kDevBaseUrl = 'http://192.168.1.130:8000/api/';
   static const _kReleaseBaseUrl = 'http://nour-eink.brainshowad.com/api/';
+  static const kImageUrl = 'http://nour-eink.brainshowad.com/storage/app/';
   static const kAppleStoreUrl = '';
   static const kGooglePlayUrl = '';
   static const kAndroidPackage = '';
@@ -25,6 +26,7 @@ class NetworkConstant {
   static const String kAboutApp = "about";
   static const String kEyePressure = "eye_pressure";
   static const String kEyeSight = "eye_Sight";
+  static const String kEyeFundus = "eye_Fundus";
   static const String kStore = "store";
 
   static const String kSendOtp = "send-otp";

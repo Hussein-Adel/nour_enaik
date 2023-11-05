@@ -26,6 +26,7 @@ class EyePressureController extends GetxController {
   void onDateChangedDate(DateTime value) {
     date = format.format(value);
     List<String> x = date!.split(' ');
+
     print("new Format $date");
     print("old Format ${x[1]}");
   }
@@ -72,10 +73,11 @@ class EyePressureController extends GetxController {
   }
 
   void storeEyePressure() async {
+    var nowDate = DateTime.now();
     isLoggedIn.value = true;
     try {
       var data = {
-        'date': date ?? '',
+        'date': date ?? '${nowDate.day} ${nowDate.month} ${nowDate.year}',
         'reading': '${count.value}',
       };
       final result = await _eyeRepository.storeEyePressure(data);

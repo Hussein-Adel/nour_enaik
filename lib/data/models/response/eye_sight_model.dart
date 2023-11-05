@@ -2,7 +2,7 @@ class EyeSightModel {
   int? id;
   String? userId;
   String? date;
-  String? images;
+  List<dynamic>? images;
   String? notes;
 
   EyeSightModel({

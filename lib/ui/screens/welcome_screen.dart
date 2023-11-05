@@ -44,7 +44,7 @@ class WelcomeScreen extends StatelessWidget {
                   child: const SizedBox(),
                 ),
                 PositionedDirectional(
-                  start: 5.w,
+                  end: 5.w,
                   bottom: 2.h,
                   child: Image.asset(
                     AppAssets.kLogoNourEnaik,

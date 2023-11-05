@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../../../constants/colors.dart';
@@ -15,11 +14,11 @@ class BottomNavigationImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SvgPicture.asset(
+    return Image.asset(
       image,
-      color: isCurrentIndex ? AppColors.blue : AppColors.grey.withOpacity(0.5),
-      width: 17.5.sp,
-      height: 17.5.sp,
+      color: isCurrentIndex ? AppColors.cyan : AppColors.blue.withOpacity(0.75),
+      width: isCurrentIndex ? 22.sp : 18.5.sp,
+      height: isCurrentIndex ? 22.5.sp : 19.sp,
       fit: BoxFit.fill,
     );
   }

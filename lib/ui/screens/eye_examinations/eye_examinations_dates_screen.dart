@@ -26,6 +26,7 @@ class EyeExaminationsDates extends StatelessWidget {
               const Spacer(),
               TextBuilder(
                 text: 'ديسمبر  2022 ',
+                verticalPadding: 0,
                 color: Colors.black,
                 size: AppFontSizes.kS6,
                 bold: true,
@@ -34,9 +35,9 @@ class EyeExaminationsDates extends StatelessWidget {
               GestureDetector(
                 onTap: () => Get.back(),
                 child: Icon(
-                  Icons.arrow_forward,
+                  Icons.arrow_forward_ios_sharp,
                   color: AppColors.darkGray,
-                  size: 25.sp,
+                  size: 20.sp,
                 ),
               ),
               SizedBox(
@@ -49,13 +50,19 @@ class EyeExaminationsDates extends StatelessWidget {
             ],
           ),
         ),
-        const EyeExaminationsComponents(),
-        const EyeExaminationsComponents(),
-        const EyeExaminationsComponents(),
-        const EyeExaminationsComponents(),
-        const EyeExaminationsComponents(),
-        const EyeExaminationsComponents(),
-        const EyeExaminationsComponents(),
+        SizedBox(
+          height: 60.h,
+          child: ListView.builder(
+            padding: EdgeInsets.zero,
+            itemCount: controller.eyeSightsList.length,
+            itemBuilder: (context, index) {
+              return EyeExaminationsComponents(
+                note: controller.eyeSightsList[index].notes ?? '',
+                date: controller.eyeSightsList[index].date ?? '',
+              );
+            },
+          ),
+        ),
         GestureDetector(
           onTap: () => controller
               .changeEyeExaminationsType(EyeExaminationsType.addPhoto),

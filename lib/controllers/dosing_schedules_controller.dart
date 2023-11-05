@@ -1,31 +1,54 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../constants/constants.dart';
+import '../ui/screens/add_new_dosing_screen.dart';
+
 class DosingSchedulesController extends GetxController {
   TextEditingController timeController = TextEditingController(text: '12:00');
   final GlobalKey<FormState> formDoseKey = GlobalKey<FormState>();
-  TextEditingController treatmentNameController = TextEditingController();
+  TextEditingController treatmentNameController =
+      TextEditingController(text: 'دواء 1');
+  RxInt? selectedIndex = 0.obs;
+  RxBool showFiled = false.obs;
   RxBool generalStatus = false.obs;
   RxBool newDoseStatus = false.obs;
   RxList<DoseModel> dosesList = <DoseModel>[
     DoseModel(
-        treatmentName: 'دورزولامول',
-        doseTime: '12:00 Am',
-        doseStatus: false.obs),
+        treatmentName: 'دواء 1', doseTime: '12:00 Am', doseStatus: false.obs),
     DoseModel(
-        treatmentName: 'دورزولامول',
-        doseTime: '12:00 Am',
-        doseStatus: true.obs),
+        treatmentName: 'دواء 2', doseTime: '12:00 Am', doseStatus: true.obs),
     DoseModel(
-        treatmentName: 'فارماتيرز', doseTime: '12:00 Am', doseStatus: true.obs),
+        treatmentName: 'دواء 3', doseTime: '12:00 Am', doseStatus: true.obs),
     DoseModel(
-        treatmentName: 'فارماتيرز',
-        doseTime: '12:00 Am',
-        doseStatus: false.obs),
+        treatmentName: 'دواء 4', doseTime: '12:00 Am', doseStatus: false.obs),
   ].obs;
   changeStatus(int index, bool status) {
     dosesList[index].doseStatus?.value = status;
     update();
+  }
+
+  updateOrDeleteDoes(int index, String status) {
+    if (status == UpdateDoes.delete.name) {
+      dosesList.removeAt(index);
+    } else {
+      treatmentNameController.text = dosesList[index].treatmentName!;
+      timeController.text = dosesList[index].doseTime!;
+      newDoseStatus = dosesList[index].doseStatus!;
+      selectedIndex = index.obs;
+
+      Get.to(AddNewDosingScreen());
+    }
+    update();
+  }
+
+  choseDose(DoseModel value) {
+    if (dosesList.last == value) {
+      treatmentNameController.text = value.treatmentName!;
+      showFiled.value = true;
+    } else {
+      showFiled.value = false;
+    }
   }
 
   void changeGeneralStatus(bool status) {
@@ -38,10 +61,19 @@ class DosingSchedulesController extends GetxController {
 
   addDose() {
     if (formDoseKey.currentState?.validate() != true) return false;
-    dosesList.add(DoseModel(
-        treatmentName: treatmentNameController.text,
-        doseTime: '${timeController.text} Am',
-        doseStatus: newDoseStatus));
+    if (selectedIndex != null) {
+      dosesList[selectedIndex!.value] = DoseModel(
+          treatmentName: treatmentNameController.text,
+          doseTime: '${timeController.text} Am',
+          doseStatus: newDoseStatus);
+    } else {
+      print(timeController.text);
+      dosesList.add(DoseModel(
+          treatmentName: treatmentNameController.text,
+          doseTime: '${timeController.text} Am',
+          doseStatus: newDoseStatus));
+    }
+    selectedIndex = null;
     update();
     Get.back();
   }

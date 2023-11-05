@@ -22,25 +22,54 @@ class AddNewDosingScreen extends StatelessWidget {
               children: [
                 Padding(
                   padding:
-                      EdgeInsets.symmetric(horizontal: 2.5.w, vertical: 5.h),
-                  child: Text(
-                    'أضافة جرعة جديدة',
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 19.sp,
-                        fontWeight: FontWeight.bold),
+                      EdgeInsets.symmetric(horizontal: 2.5.w, vertical: 3.5.h),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      IconButton(
+                          onPressed: () => Get.back(),
+                          icon: Icon(
+                            Icons.arrow_back,
+                            color: Colors.white,
+                            size: 25.sp,
+                          )),
+                      Text(
+                        'أضافة جرعة جديدة',
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 19.sp,
+                            fontWeight: FontWeight.bold),
+                      ),
+                      SizedBox(
+                        width: 7.5.w,
+                      )
+                    ],
                   ),
                 ),
-                TextFormFieldBuilder(
-                  hint: 'أسم الدواء',
-                  controller: controller.treatmentNameController,
-                  validator: Validators.compose([
-                    Validators.required('Required'),
-                    Validators.minLength(1, 'Required')
-                  ]),
-                  shadow: true,
-                  textInputAction: TextInputAction.done,
+                DropDownBuilder(
+                  value: controller
+                      .dosesList.value[controller.selectedIndex?.value ?? 0],
+                  items: controller.dosesList.value +
+                      [
+                        DoseModel(
+                            treatmentName: 'أخرى',
+                            doseTime: '12:00 Am',
+                            doseStatus: false.obs),
+                      ],
+                  onChanged: (value) => controller.choseDose(value),
                 ),
+                controller.showFiled.value
+                    ? TextFormFieldBuilder(
+                        hint: 'أسم الدواء',
+                        controller: controller.treatmentNameController,
+                        validator: Validators.compose([
+                          Validators.required('Required'),
+                          Validators.minLength(1, 'Required')
+                        ]),
+                        shadow: true,
+                        textInputAction: TextInputAction.done,
+                      )
+                    : const SizedBox(),
                 SizedBox(
                   height: 20.h,
                   width: 100.w,
@@ -77,7 +106,7 @@ class AddNewDosingScreen extends StatelessWidget {
                     height: 9.w,
                     child: Center(
                       child: Text(
-                        'أضافة جرعة',
+                        'حفظ',
                         style: TextStyle(
                             color: Colors.white, fontSize: AppFontSizes.kS4),
                       ),

@@ -149,7 +149,9 @@ class HomeScreen extends StatelessWidget {
                               text: 'فحص قاع العين',
                               page:
                                   EyeExaminationsScreen(title: 'فحص قاع العين'),
-                              onTap: () {},
+                              onTap: () {
+                                examinationsController.getEyeFundus();
+                              },
                             ),
                           ],
                         ),

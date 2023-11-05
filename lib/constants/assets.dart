@@ -10,7 +10,9 @@ class AppAssets {
   static const kEyeImage = '$kAssets/eye_image.png';
   static const kWelcomePage1 = '$kAssets/welcome_page_1.png';
   static const kWelcomePage2 = '$kAssets/welcome_page_2.png';
-  static const kProfileIcon = '$kAssets/profile_icon.svg';
-  static const kHomeIcon = '$kAssets/home_icon.svg';
-  static const kOfferIcon = '$kAssets/offer_icon.svg';
+  static const kProfileIcon = '$kAssets/profile.png';
+  static const kHomeIcon = '$kAssets/home.png';
+  static const kAlarmIcon = '$kAssets/alarm.png';
+  static const kChatIcon = '$kAssets/chat.png';
+  static const kNotificationsIcon = '$kAssets/notifications.png';
 }

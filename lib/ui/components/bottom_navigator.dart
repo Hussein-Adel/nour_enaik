@@ -19,7 +19,7 @@ class BottomNavigator extends StatelessWidget {
       color: AppColors.white,
       verticalMargin: 0,
       horizontalMargin: 0,
-      verticalPadding: 1.h,
+      verticalPadding: 0.5.h,
       borderRadius: const BorderRadius.only(
           topRight: Radius.circular(35.0), topLeft: Radius.circular(35.0)),
       child: BottomNavigationBar(
@@ -31,35 +31,35 @@ class BottomNavigator extends StatelessWidget {
         items: <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: BottomNavigationImage(
-              image: AppAssets.kHomeIcon,
+              image: AppAssets.kNotificationsIcon,
               isCurrentIndex: index == 0,
             ),
             label: '',
           ),
           BottomNavigationBarItem(
             icon: BottomNavigationImage(
-              image: AppAssets.kProfileIcon,
+              image: AppAssets.kHomeIcon,
               isCurrentIndex: index == 1,
             ),
             label: '',
           ),
           BottomNavigationBarItem(
             icon: BottomNavigationImage(
-              image: AppAssets.kOfferIcon,
+              image: AppAssets.kAlarmIcon,
               isCurrentIndex: index == 2,
             ),
             label: '',
           ),
           BottomNavigationBarItem(
             icon: BottomNavigationImage(
-              image: AppAssets.kHomeIcon,
+              image: AppAssets.kProfileIcon,
               isCurrentIndex: index == 3,
             ),
             label: '',
           ),
           BottomNavigationBarItem(
             icon: BottomNavigationImage(
-              image: AppAssets.kHomeIcon,
+              image: AppAssets.kChatIcon,
               isCurrentIndex: index == 4,
             ),
             label: '',

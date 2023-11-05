@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../constants/constants.dart';
 import '../data/models/response/user_response.dart';
 import '../data/networks/model_response.dart';
 import 'auth_controller.dart';
 
 class SignUpController extends AuthController {
+  Rx<SignUpType> type = SignUpType.patient.obs;
   String countryCode = '+966';
   List<String> countryCodeList = ['+20', '+966'];
   RxBool isLoading = false.obs;
@@ -16,6 +18,10 @@ class SignUpController extends AuthController {
   TextEditingController phoneController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   TextEditingController confirmPasswordController = TextEditingController();
+  changeType(SignUpType newType) {
+    type.value = newType;
+  }
+
   changeCountryCode(value) {
     countryCode = value;
   }

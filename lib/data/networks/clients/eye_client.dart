@@ -20,4 +20,9 @@ abstract class EyeClient {
   Future<BaseResponseList<EyeSightModel>> getEyeSight();
   @POST('${NetworkConstant.kEyeSight}/${NetworkConstant.kStore}')
   Future<BaseResponseList<EyeSightModel>> storeEyeSight(@Body() var model);
+
+  @GET(NetworkConstant.kEyeFundus)
+  Future<BaseResponseList<EyeSightModel>> getEyeFundus();
+  @POST('${NetworkConstant.kEyeFundus}/${NetworkConstant.kStore}')
+  Future<BaseResponseList<EyeSightModel>> storeEyeFundus(@Body() var model);
 }

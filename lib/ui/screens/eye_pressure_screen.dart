@@ -67,74 +67,64 @@ class EyePressureScreen extends StatelessWidget {
                       SizedBox(
                         height: 2.5.h,
                       ),
-                      Row(
-                        children: [
-                          const Icon(
-                            Icons.error_outline_sharp,
-                            color: AppColors.cyan,
-                          ),
-                          const Spacer(),
-                          Column(
-                            children: [
-                              Row(
-                                crossAxisAlignment: CrossAxisAlignment.end,
-                                children: [
-                                  Text(
-                                    'مم زئبقي',
-                                    style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      color: AppColors.navyBlue,
-                                      fontSize: AppFontSizes.kS4,
+                      controller.chartDataList.isEmpty
+                          ? const SizedBox()
+                          : Row(
+                              children: [
+                                const Icon(
+                                  Icons.error_outline_sharp,
+                                  color: AppColors.cyan,
+                                ),
+                                const Spacer(),
+                                Column(
+                                  children: [
+                                    Row(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.end,
+                                      children: [
+                                        Text(
+                                          'مم زئبقي',
+                                          style: TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                            color: AppColors.navyBlue,
+                                            fontSize: AppFontSizes.kS4,
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          width: 1.5.w,
+                                        ),
+                                        Text(
+                                          '${controller.chartDataList.value.last.reading}',
+                                          style: TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                            color: AppColors.navyBlue,
+                                            fontSize: AppFontSizes.kS10,
+                                          ),
+                                        ),
+                                      ],
                                     ),
-                                  ),
-                                  SizedBox(
-                                    width: 1.5.w,
-                                  ),
-                                  Text(
-                                    '23',
-                                    style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      color: AppColors.navyBlue,
-                                      fontSize: AppFontSizes.kS10,
+                                    TextBuilder(
+                                      text:
+                                          '${controller.eyePressuresList.first.date}',
+                                      verticalPadding: 0,
+                                      color: AppColors.darkGray,
+                                      size: AppFontSizes.kS3,
                                     ),
-                                  ),
-                                ],
-                              ),
-                              TextBuilder(
-                                text: '${2023}  ديسمبر',
-                                verticalPadding: 0,
-                                color: AppColors.darkGray,
-                                size: AppFontSizes.kS3,
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                      Row(
-                        children: [
-                          const Spacer(),
-                          Container(
-                            width: 10.w,
-                            height: 2.h,
-                            decoration: BoxDecoration(
-                              color: AppColors.white,
-                              borderRadius: BorderRadius.circular(2.5),
-                              border: Border.all(
-                                  color: AppColors.black, width: 0.35.sp),
+                                  ],
+                                ),
+                              ],
                             ),
-                            child: Center(
-                                child: Text(
-                              'سنة',
-                              style: TextStyle(
-                                fontSize: 8.5.sp,
-                                fontWeight: FontWeight.bold,
-                                color: AppColors.darkBlue,
-                              ),
-                            )),
+                      Row(
+                        children: [
+                          Radio(value: 1, groupValue: 1, onChanged: (value) {}),
+                          TextBuilder(
+                            text: 'تحليل البيانات ',
+                            bold: true,
+                            size: AppFontSizes.kS3,
+                            horizontalPadding: 0.25.w,
+                            color: AppColors.darkBlue,
                           ),
-                          SizedBox(
-                            width: 1.5.w,
-                          ),
+                          SizedBox(width: 1.5.w),
                           Container(
                             width: 10.w,
                             height: 2.h,
@@ -155,32 +145,30 @@ class EyePressureScreen extends StatelessWidget {
                           SizedBox(
                             width: 2.5.w,
                           ),
-                          TextBuilder(
-                            text: 'تحليل البيانات ',
-                            bold: true,
-                            size: AppFontSizes.kS3,
-                            horizontalPadding: 0.25.w,
-                            color: AppColors.darkBlue,
+                          Container(
+                            width: 10.w,
+                            height: 2.h,
+                            decoration: BoxDecoration(
+                              color: AppColors.white,
+                              borderRadius: BorderRadius.circular(2.5),
+                              border: Border.all(
+                                  color: AppColors.black, width: 0.35.sp),
+                            ),
+                            child: Center(
+                                child: Text(
+                              'سنة',
+                              style: TextStyle(
+                                fontSize: 8.5.sp,
+                                fontWeight: FontWeight.bold,
+                                color: AppColors.darkBlue,
+                              ),
+                            )),
                           ),
-                          Radio(value: 1, groupValue: 1, onChanged: (value) {}),
+                          const Spacer(),
                         ],
                       ),
                       BuilderChart(
                         chartData: controller.chartDataList.value,
-                        // [
-                        //   ReadingData('January', 10),
-                        //   ReadingData('February', 15),
-                        //   ReadingData('March', 20),
-                        //   ReadingData('April', 5),
-                        //   ReadingData('May', 30),
-                        //   ReadingData('June', 25),
-                        //   ReadingData('July', 35),
-                        //   ReadingData('August', 0),
-                        //   ReadingData('September', 17),
-                        //   ReadingData('October', 28),
-                        //   ReadingData('November', 30),
-                        //   ReadingData('December', 5),
-                        // ],
                         max: 60,
                         min: 0,
                       ),

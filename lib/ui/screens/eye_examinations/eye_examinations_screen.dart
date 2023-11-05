@@ -18,6 +18,7 @@ class EyeExaminationsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Obx(
       () => BaseScreen(
+        isLoading: controller.isLoading.value,
         verticalPadding: 0,
         body: Column(
           children: [
@@ -65,7 +66,7 @@ class EyeExaminationsScreen extends StatelessWidget {
                           : controller.eyeExaminations.value ==
                                   EyeExaminationsType.gallery
                               ? GridView.builder(
-                                  itemCount: 22,
+                                  itemCount: controller.eyeSightsList.length,
                                   shrinkWrap: true,
                                   physics: const NeverScrollableScrollPhysics(),
                                   gridDelegate:
@@ -78,7 +79,7 @@ class EyeExaminationsScreen extends StatelessWidget {
                                     return FullScreenWidget(
                                         disposeLevel: DisposeLevel.Medium,
                                         child: Image.asset(
-                                          AppAssets.kEyeImage,
+                                          AppAssets.kEyePressure,
                                         ));
                                   },
                                 )

@@ -53,7 +53,7 @@ class AddEyeExamination extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'جاري التحميل',
+                        'الصور',
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           color: AppColors.darkBlue,
@@ -165,7 +165,10 @@ class AddEyeExamination extends StatelessWidget {
                     width: 25.w,
                     height: 15.w,
                     child: GestureDetector(
-                      onTap: () => Get.back(),
+                      onTap: controller.examinationsType.value ==
+                              ExaminationsType.eyeSight
+                          ? controller.storeEyeSight
+                          : controller.storeEyeFundus,
                       child: Icon(
                         Icons.arrow_forward,
                         color: Colors.white,

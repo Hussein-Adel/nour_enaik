@@ -5,16 +5,19 @@ import '../../constants/constants.dart';
 import 'components.dart';
 
 class EyeExaminationsComponents extends StatelessWidget {
-  const EyeExaminationsComponents({super.key});
-
+  const EyeExaminationsComponents(
+      {super.key, required this.date, required this.note});
+  final String date;
+  final String note;
   @override
   Widget build(BuildContext context) {
+    List<String> dateList = date.split(' ');
     return Row(
       children: [
         EmptyCard(
           verticalPadding: 1.25.h,
           verticalMargin: 0,
-          width: 70.w,
+          width: 68.w,
           radius: 10,
           horizontalMargin: 4.w,
           color: Colors.cyan.withOpacity(0.6),
@@ -27,7 +30,7 @@ class EyeExaminationsComponents extends StatelessWidget {
               ),
               const Spacer(),
               TextBuilder(
-                text: 'تسجيل الفحوصات للعين',
+                text: note,
                 size: 11.sp,
                 bold: true,
                 color: Colors.white,
@@ -60,23 +63,28 @@ class EyeExaminationsComponents extends StatelessWidget {
             ],
           ),
         ),
-        Column(
-          children: [
-            Text(
-              '10',
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                color: AppColors.navyBlue,
-                fontSize: AppFontSizes.kS7,
+        SizedBox(
+          width: 10.w,
+          child: Column(
+            children: [
+              Text(
+                dateList[0],
+                maxLines: 1,
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  color: AppColors.navyBlue,
+                  fontSize: AppFontSizes.kS7,
+                ),
               ),
-            ),
-            TextBuilder(
-              text: 'Wed',
-              verticalPadding: 0,
-              color: AppColors.darkGray,
-              size: AppFontSizes.kS3,
-            ),
-          ],
+              TextBuilder(
+                text: dateList[1],
+                maxLin: 1,
+                verticalPadding: 0,
+                color: AppColors.darkGray,
+                size: AppFontSizes.kS3,
+              ),
+            ],
+          ),
         ),
       ],
     );

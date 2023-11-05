@@ -139,6 +139,66 @@ class _EyeClient implements EyeClient {
     return value;
   }
 
+  @override
+  Future<BaseResponseList<EyeSightModel>> getEyeFundus() async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final Map<String, dynamic>? _data = null;
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<BaseResponseList<EyeSightModel>>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              'eye_Fundus',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final value = BaseResponseList<EyeSightModel>.fromJson(
+      _result.data!,
+      (json) => EyeSightModel.fromJson(json as Map<String, dynamic>),
+    );
+    return value;
+  }
+
+  @override
+  Future<BaseResponseList<EyeSightModel>> storeEyeFundus(dynamic model) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = model;
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<BaseResponseList<EyeSightModel>>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              'eye_Fundus/store',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final value = BaseResponseList<EyeSightModel>.fromJson(
+      _result.data!,
+      (json) => EyeSightModel.fromJson(json as Map<String, dynamic>),
+    );
+    return value;
+  }
+
   RequestOptions _setStreamType<T>(RequestOptions requestOptions) {
     if (T != dynamic &&
         !(requestOptions.responseType == ResponseType.bytes ||

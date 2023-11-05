@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_switch/flutter_switch.dart';
 import 'package:get/get.dart';
-import 'package:nour_enaik/ui/screens/add_new_dosing_screen.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../constants/constants.dart';
@@ -29,7 +28,10 @@ class DosingSchedulesScreen extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         GestureDetector(
-                          onTap: () => Get.to(AddNewDosingScreen()),
+                          onTap: () {
+                            controller.selectedIndex = null;
+                            Get.to(AddNewDosingScreen());
+                          },
                           child: Icon(
                             Icons.add,
                             size: 25.sp,
@@ -88,13 +90,15 @@ class DosingSchedulesScreen extends StatelessWidget {
                     builder: (controller) => SizedBox(
                       height: 50.h,
                       child: ListView.builder(
-                          itemCount: controller.dosesList.length,
+                          itemCount: controller.dosesList.length - 1,
                           shrinkWrap: true,
                           itemBuilder: (context, index) {
                             return SchedulesItem(
                               model: controller.dosesList[index],
                               changeStatus: (value) =>
                                   controller.changeStatus(index, value),
+                              updateDoes: (value) =>
+                                  controller.updateOrDeleteDoes(index, value),
                             );
                           }),
                     ),
@@ -117,19 +121,33 @@ class DosingSchedulesScreen extends StatelessWidget {
 
 class SchedulesItem extends StatelessWidget {
   const SchedulesItem(
-      {super.key, required this.model, required this.changeStatus});
+      {super.key,
+      required this.model,
+      required this.changeStatus,
+      required this.updateDoes});
   final DoseModel model;
   final Function(bool) changeStatus;
+  final Function(String) updateDoes;
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.symmetric(vertical: 2.h),
       child: Row(
         children: [
-          Icon(
-            Icons.more_vert_sharp,
-            color: AppColors.lightGrey,
-            size: 22.5.sp,
+          PopupMenuButton(
+            onSelected: updateDoes,
+            itemBuilder: (BuildContext bc) {
+              return const [
+                PopupMenuItem(
+                  child: Text("تعديل"),
+                  value: 'edite',
+                ),
+                PopupMenuItem(
+                  child: Text("حذف"),
+                  value: 'delete',
+                ),
+              ];
+            },
           ),
           SizedBox(width: 1.5.w),
           Text(

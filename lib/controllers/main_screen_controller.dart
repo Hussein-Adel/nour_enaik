@@ -7,11 +7,11 @@ class MainScreenController extends GetxController {
   RxInt currentIndex = 0.obs;
 
   void onBottomSheetChanged(int index, BuildContext context) {
-    if (context.mounted) {
-      if (index == 1) {
-      } else if (index == 2) {
-      } else if (index == 3) {}
-    }
+    // if (context.mounted) {
+    //   if (index == 1) {
+    //   } else if (index == 2) {
+    //   } else if (index == 3) {}
+    // }
     currentIndex.value = index;
   }
 
@@ -25,8 +25,8 @@ class MainScreenController extends GetxController {
   }
 
   List<Widget> homeScreensList = [
-    HomeScreen(),
     const AlarmScreen(),
+    HomeScreen(),
     DosingSchedulesScreen(),
     HomeScreen(),
     HomeScreen(),
