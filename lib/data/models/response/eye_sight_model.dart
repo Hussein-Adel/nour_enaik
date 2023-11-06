@@ -2,7 +2,7 @@ class EyeSightModel {
   int? id;
   String? userId;
   String? date;
-  List<dynamic>? images;
+  List<String>? images;
   String? notes;
 
   EyeSightModel({
@@ -17,7 +17,7 @@ class EyeSightModel {
     id = json['id'];
     userId = json['user_id'];
     date = json['date'];
-    images = json['images'];
+    images = json['images'].cast<String>();
     notes = json['notes'];
   }
 

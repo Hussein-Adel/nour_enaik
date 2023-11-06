@@ -47,15 +47,8 @@ class AddNewDosingScreen extends StatelessWidget {
                   ),
                 ),
                 DropDownBuilder(
-                  value: controller
-                      .dosesList.value[controller.selectedIndex?.value ?? 0],
-                  items: controller.dosesList.value +
-                      [
-                        DoseModel(
-                            treatmentName: 'أخرى',
-                            doseTime: '12:00 Am',
-                            doseStatus: false.obs),
-                      ],
+                  value: controller.dropDownDosesList.value[0],
+                  items: controller.dropDownDosesList.value,
                   onChanged: (value) => controller.choseDose(value),
                 ),
                 controller.showFiled.value

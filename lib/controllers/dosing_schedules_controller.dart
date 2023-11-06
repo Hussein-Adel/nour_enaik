@@ -23,6 +23,18 @@ class DosingSchedulesController extends GetxController {
     DoseModel(
         treatmentName: 'دواء 4', doseTime: '12:00 Am', doseStatus: false.obs),
   ].obs;
+  RxList<DoseModel> dropDownDosesList = <DoseModel>[
+    DoseModel(
+        treatmentName: 'دواء 1', doseTime: '12:00 Am', doseStatus: false.obs),
+    DoseModel(
+        treatmentName: 'دواء 2', doseTime: '12:00 Am', doseStatus: true.obs),
+    DoseModel(
+        treatmentName: 'دواء 3', doseTime: '12:00 Am', doseStatus: true.obs),
+    DoseModel(
+        treatmentName: 'دواء 4', doseTime: '12:00 Am', doseStatus: false.obs),
+    DoseModel(
+        treatmentName: 'أخرى', doseTime: '12:00 Am', doseStatus: false.obs),
+  ].obs;
   changeStatus(int index, bool status) {
     dosesList[index].doseStatus?.value = status;
     update();
@@ -32,21 +44,21 @@ class DosingSchedulesController extends GetxController {
     if (status == UpdateDoes.delete.name) {
       dosesList.removeAt(index);
     } else {
-      treatmentNameController.text = dosesList[index].treatmentName!;
+      treatmentNameController.text = dropDownDosesList[0].treatmentName!;
       timeController.text = dosesList[index].doseTime!;
       newDoseStatus = dosesList[index].doseStatus!;
       selectedIndex = index.obs;
-
       Get.to(AddNewDosingScreen());
     }
     update();
   }
 
   choseDose(DoseModel value) {
-    if (dosesList.last == value) {
+    if (dropDownDosesList.last == value) {
       treatmentNameController.text = value.treatmentName!;
       showFiled.value = true;
     } else {
+      treatmentNameController.text = value.treatmentName!;
       showFiled.value = false;
     }
   }
@@ -62,6 +74,7 @@ class DosingSchedulesController extends GetxController {
   addDose() {
     if (formDoseKey.currentState?.validate() != true) return false;
     if (selectedIndex != null) {
+      print(selectedIndex?.value);
       dosesList[selectedIndex!.value] = DoseModel(
           treatmentName: treatmentNameController.text,
           doseTime: '${timeController.text} Am',

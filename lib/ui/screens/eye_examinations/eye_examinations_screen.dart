@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:full_screen_image/full_screen_image.dart';
 import 'package:get/get.dart';
+import 'package:nour_enaik/data/networks/network_constant.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../../constants/constants.dart';
@@ -66,7 +67,7 @@ class EyeExaminationsScreen extends StatelessWidget {
                           : controller.eyeExaminations.value ==
                                   EyeExaminationsType.gallery
                               ? GridView.builder(
-                                  itemCount: controller.eyeSightsList.length,
+                                  itemCount: controller.allImages?.length,
                                   shrinkWrap: true,
                                   physics: const NeverScrollableScrollPhysics(),
                                   gridDelegate:
@@ -78,8 +79,13 @@ class EyeExaminationsScreen extends StatelessWidget {
                                   itemBuilder: (_, index) {
                                     return FullScreenWidget(
                                         disposeLevel: DisposeLevel.Medium,
-                                        child: Image.asset(
-                                          AppAssets.kEyePressure,
+                                        child: EmptyCard(
+                                          radius: 7.5,
+                                          horizontalMargin: 1.5.w,
+                                          verticalMargin: 0.5.h,
+                                          url: NetworkConstant.kImageUrl +
+                                              controller.allImages![index],
+                                          child: const SizedBox(),
                                         ));
                                   },
                                 )

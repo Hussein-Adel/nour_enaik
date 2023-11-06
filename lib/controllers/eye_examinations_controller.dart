@@ -11,12 +11,12 @@ import '../data/models/response/response.dart';
 import '../data/repository/repository.dart';
 
 class EyeExaminationsController extends GetxController {
-  // RxList<dynamic> allImages = <dynamic>[].obs;
   RxList<EyeSightModel> eyeSightsList = <EyeSightModel>[].obs;
   Rx<ExaminationsType> examinationsType = ExaminationsType.eyeSight.obs;
   final _eyeRepository = locator<EyeRepository>();
   RxBool isLoading = false.obs;
   String? date;
+  RxList<String>? allImages = <String>[].obs;
   Rx<EyeExaminationsType> eyeExaminations = EyeExaminationsType.date.obs;
   RxList<XFile> pickedImages = <XFile>[].obs;
   final ImagePicker _picker = ImagePicker();
@@ -53,16 +53,10 @@ class EyeExaminationsController extends GetxController {
       if (result.data != null) {
         isLoading.value = false;
         eyeSightsList.value = result.data!;
-        // print("ssssssssssssssssss");
-        // eyeSightsList.value.forEach((image) {
-        //   image.images!.forEach((element) {
-        //     print("zzzzzzzzzzzzz");
-        //     print(element);
-        //     allImages?.add(element.toString());
-        //   });
-        // });
-        // print(allImages);
-        // print("ssssssssssssssssss");
+
+        eyeSightsList.forEach((model) {
+          allImages!.addAll(model.images!);
+        });
       } else {
         Get.showSnackbar(GetSnackBar(
           title: 'Error',
@@ -99,6 +93,9 @@ class EyeExaminationsController extends GetxController {
       if (result.data != null) {
         isLoading.value = false;
         eyeSightsList.value = result.data!;
+        eyeSightsList.forEach((model) {
+          allImages!.addAll(model.images!);
+        });
       } else {
         Get.showSnackbar(GetSnackBar(
           title: 'Error',
@@ -128,6 +125,9 @@ class EyeExaminationsController extends GetxController {
       if (result.data != null) {
         isLoading.value = false;
         eyeSightsList.value = result.data!;
+        eyeSightsList.forEach((model) {
+          allImages!.addAll(model.images!);
+        });
       } else {
         Get.showSnackbar(GetSnackBar(
           title: 'Error',
@@ -164,6 +164,9 @@ class EyeExaminationsController extends GetxController {
       if (result.data != null) {
         isLoading.value = false;
         eyeSightsList.value = result.data!;
+        eyeSightsList.forEach((model) {
+          allImages!.addAll(model.images!);
+        });
       } else {
         Get.showSnackbar(GetSnackBar(
           title: 'Error',
@@ -188,5 +191,6 @@ class EyeExaminationsController extends GetxController {
     date = '';
     eyeExaminations.value = EyeExaminationsType.date;
     notesControllers.clear();
+    allImages = <String>[].obs;
   }
 }

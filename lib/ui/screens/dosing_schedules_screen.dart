@@ -19,6 +19,12 @@ class DosingSchedulesScreen extends StatelessWidget {
       () => BaseScreen(
         body: Stack(
           children: [
+            PositionedDirectional(
+              height: 30.h,
+              width: 100.w,
+              bottom: 3.h,
+              child: Image.asset(AppAssets.kLogoNourEnaik),
+            ),
             SingleChildScrollView(
               child: Column(
                 children: [
@@ -88,9 +94,9 @@ class DosingSchedulesScreen extends StatelessWidget {
                   ),
                   GetBuilder<DosingSchedulesController>(
                     builder: (controller) => SizedBox(
-                      height: 50.h,
+                      height: 60.h,
                       child: ListView.builder(
-                          itemCount: controller.dosesList.length - 1,
+                          itemCount: controller.dosesList.length,
                           shrinkWrap: true,
                           itemBuilder: (context, index) {
                             return SchedulesItem(
@@ -105,12 +111,6 @@ class DosingSchedulesScreen extends StatelessWidget {
                   ),
                 ],
               ),
-            ),
-            PositionedDirectional(
-              height: 30.h,
-              width: 100.w,
-              bottom: 3.h,
-              child: Image.asset(AppAssets.kLogoNourEnaik),
             ),
           ],
         ),
