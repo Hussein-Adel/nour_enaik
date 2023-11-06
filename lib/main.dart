@@ -22,7 +22,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Sizer(
-      builder: (context, orientation, deviceType) {
+      builder: (context, orientationل, deviceType) {
         return GetMaterialApp(
           title: AppStrings.kAppName,
           textDirection: TextDirection.rtl,
