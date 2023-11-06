@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 import '../ui/screens/screens.dart';
 
 class MainScreenController extends GetxController {
-  RxInt currentIndex = 0.obs;
+  RxInt currentIndex = 1.obs;
 
   void onBottomSheetChanged(int index, BuildContext context) {
     // if (context.mounted) {
@@ -16,10 +16,10 @@ class MainScreenController extends GetxController {
   }
 
   Future<bool> onWillPop(BuildContext context) async {
-    if (currentIndex.value == 0) {
+    if (currentIndex.value == 1) {
       return true;
     } else {
-      currentIndex.value = 0;
+      currentIndex.value = 1;
       return false;
     }
   }

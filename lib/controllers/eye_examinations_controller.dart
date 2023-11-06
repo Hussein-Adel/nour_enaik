@@ -15,7 +15,7 @@ class EyeExaminationsController extends GetxController {
   Rx<ExaminationsType> examinationsType = ExaminationsType.eyeSight.obs;
   final _eyeRepository = locator<EyeRepository>();
   RxBool isLoading = false.obs;
-  String? date;
+  String? chosenDate;
   RxList<String>? allImages = <String>[].obs;
   Rx<EyeExaminationsType> eyeExaminations = EyeExaminationsType.date.obs;
   RxList<XFile> pickedImages = <XFile>[].obs;
@@ -24,8 +24,8 @@ class EyeExaminationsController extends GetxController {
 
   void onDateChangedDate(DateTime value) {
     DateFormat format = DateFormat("dd MMMM yyyy");
-    date = format.format(value);
-    print("new Format $date");
+    chosenDate = format.format(value);
+    print("new Format $chosenDate");
   }
 
   deleteImage(int index) {
@@ -55,7 +55,7 @@ class EyeExaminationsController extends GetxController {
         eyeSightsList.value = result.data!;
 
         eyeSightsList.forEach((model) {
-          allImages!.addAll(model.images!);
+          allImages?.addAll(model.images!);
         });
       } else {
         Get.showSnackbar(GetSnackBar(
@@ -78,10 +78,13 @@ class EyeExaminationsController extends GetxController {
   void storeEyeSight() async {
     eyeSightsList.clear();
     var nowDate = DateTime.now();
+    allImages?.clear();
     isLoading.value = true;
     try {
       var data = dio.FormData.fromMap({
-        'date': date ?? '${nowDate.day} ${nowDate.month} ${nowDate.year}',
+        'date': chosenDate == null || chosenDate == ''
+            ? '${nowDate.day} ${nowDate.month} ${nowDate.year}'
+            : chosenDate,
         'notes': notesControllers.text,
         'images[]': pickedImages
             .map((e) => dio.MultipartFile.fromFileSync(
@@ -94,7 +97,7 @@ class EyeExaminationsController extends GetxController {
         isLoading.value = false;
         eyeSightsList.value = result.data!;
         eyeSightsList.forEach((model) {
-          allImages!.addAll(model.images!);
+          allImages?.addAll(model.images!);
         });
       } else {
         Get.showSnackbar(GetSnackBar(
@@ -126,7 +129,7 @@ class EyeExaminationsController extends GetxController {
         isLoading.value = false;
         eyeSightsList.value = result.data!;
         eyeSightsList.forEach((model) {
-          allImages!.addAll(model.images!);
+          allImages?.addAll(model.images!);
         });
       } else {
         Get.showSnackbar(GetSnackBar(
@@ -148,11 +151,14 @@ class EyeExaminationsController extends GetxController {
 
   void storeEyeFundus() async {
     eyeSightsList.clear();
+    allImages?.clear();
     var nowDate = DateTime.now();
     isLoading.value = true;
     try {
       var data = dio.FormData.fromMap({
-        'date': date ?? '${nowDate.day} ${nowDate.month} ${nowDate.year}',
+        'date': chosenDate == null || chosenDate == ''
+            ? '${nowDate.day} ${nowDate.month} ${nowDate.year}'
+            : chosenDate,
         'notes': notesControllers.text,
         'images[]': pickedImages
             .map((e) => dio.MultipartFile.fromFileSync(
@@ -165,7 +171,7 @@ class EyeExaminationsController extends GetxController {
         isLoading.value = false;
         eyeSightsList.value = result.data!;
         eyeSightsList.forEach((model) {
-          allImages!.addAll(model.images!);
+          allImages?.addAll(model.images!);
         });
       } else {
         Get.showSnackbar(GetSnackBar(
@@ -188,9 +194,8 @@ class EyeExaminationsController extends GetxController {
 
   clearFunction() {
     pickedImages.clear();
-    date = '';
+    chosenDate = '';
     eyeExaminations.value = EyeExaminationsType.date;
     notesControllers.clear();
-    allImages = <String>[].obs;
   }
 }
