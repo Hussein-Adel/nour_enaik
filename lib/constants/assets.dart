@@ -15,4 +15,5 @@ class AppAssets {
   static const kAlarmIcon = '$kAssets/alarm.png';
   static const kChatIcon = '$kAssets/chat.png';
   static const kNotificationsIcon = '$kAssets/notifications.png';
+  static const kEditIcon = '$kAssets/edit_icon.svg';
 }

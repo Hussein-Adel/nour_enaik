@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
+import 'package:nour_enaik/ui/screens/profile_screen.dart';
 
 import '../ui/screens/screens.dart';
 
@@ -28,7 +29,7 @@ class MainScreenController extends GetxController {
     const AlarmScreen(),
     HomeScreen(),
     DosingSchedulesScreen(),
-    HomeScreen(),
+    ProfileScreen(),
     HomeScreen(),
   ];
 }

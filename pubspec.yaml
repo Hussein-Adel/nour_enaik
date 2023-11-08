@@ -50,6 +50,7 @@ dependencies:
   full_screen_image: ^2.0.0
   fluttertoast: ^8.1.2
   cached_network_image: ^3.2.3
+  flutter_svg_provider: ^1.0.3
 
 
   # The following adds the Cupertino Icons font to your application.

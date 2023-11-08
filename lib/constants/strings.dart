@@ -33,4 +33,6 @@ class AppStrings {
   static const kTermsService = 'terms_service';
   static const kAnd = 'and';
   static const kOrLoginScreen = 'or';
+  static const kMyAccount = 'my_account';
+  static const kPhoneNumber = 'phone_number';
 }
