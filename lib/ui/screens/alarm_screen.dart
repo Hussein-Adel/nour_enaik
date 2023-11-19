@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:nour_enaik/controllers/controllers.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../constants/constants.dart';
@@ -10,6 +11,7 @@ class AlarmScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    MainController controller = Get.find();
     return BaseScreen(
       verticalPadding: 0,
       body: Column(
@@ -88,7 +90,7 @@ class AlarmScreen extends StatelessWidget {
                 start: 32.5.w,
                 top: 7.5.h,
                 child: Text(
-                  '06:00',
+                  controller.alarmTime.value,
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                     color: AppColors.green,
@@ -100,7 +102,7 @@ class AlarmScreen extends StatelessWidget {
                 start: 32.5.w,
                 bottom: 15.h,
                 child: Text(
-                  'فارما تيرز',
+                  controller.treatmentName.value,
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                     color: AppColors.bBlue,
@@ -117,6 +119,7 @@ class AlarmScreen extends StatelessWidget {
                   children: [
                     ButtonBuilder(
                       title: 'تأجيل',
+                      onPressed: () => controller.stopAlarm(),
                       height: 4.5.h,
                       width: 30.w,
                       titleColor: AppColors.white,
@@ -127,6 +130,7 @@ class AlarmScreen extends StatelessWidget {
                     ),
                     ButtonBuilder(
                       title: 'إيقاف',
+                      onPressed: () => controller.stopAlarm(),
                       height: 4.5.h,
                       width: 30.w,
                       titleColor: AppColors.darkGray,

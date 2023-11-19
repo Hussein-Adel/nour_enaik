@@ -5,6 +5,7 @@ import 'package:sizer/sizer.dart';
 
 import '../../constants/constants.dart';
 import '../../controllers/controllers.dart';
+import '../../data/sqldb/sqldb.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
@@ -24,6 +25,7 @@ class _SplashScreenState extends State<SplashScreen>
   }
 
   // late AuthController authController;
+  final _sqlDb = SqlDb();
 
   void initData() async {
     animationController =
@@ -67,6 +69,10 @@ class _SplashScreenState extends State<SplashScreen>
       (status) async {
         if (status == AnimationStatus.completed) {
           if (authController.isLoggedIn) {
+            DosingSchedulesController dosingSchedulesController =
+                Get.put(DosingSchedulesController());
+            dosingSchedulesController.dosesList.value =
+                await _sqlDb.getAlarmsFromDataBase();
             Get.off(MainScreen());
           } else {
             Get.off(const WelcomeScreen());

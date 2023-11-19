@@ -10,7 +10,7 @@ class DrawerScreen extends StatelessWidget {
   DrawerScreen({super.key});
   final GeneralController controller = Get.put(GeneralController());
   final AuthController authController = Get.find();
-  final MainScreenController mainScreenController = Get.find();
+  final MainController mainScreenController = Get.find();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -113,20 +113,20 @@ class DrawerScreen extends StatelessWidget {
                   DrawerComponent(
                       text: 'تذكير بالقطرات',
                       onTap: () {
-                        mainScreenController.onBottomSheetChanged(2, context);
+                        mainScreenController.onBottomSheetChanged(2);
                         Get.back();
                       }),
                   DrawerComponent(
                       text: 'فحوصاتي',
                       onTap: () {
-                        mainScreenController.onBottomSheetChanged(1, context);
+                        mainScreenController.onBottomSheetChanged(1);
                         Get.back();
                       }),
                   DrawerComponent(text: 'نصائح', onTap: () {}),
                   DrawerComponent(
                       text: 'حسابي',
                       onTap: () {
-                        mainScreenController.onBottomSheetChanged(3, context);
+                        mainScreenController.onBottomSheetChanged(3);
                         Get.back();
                       }),
                   DrawerComponent(text: 'نقاطي', onTap: () {}),

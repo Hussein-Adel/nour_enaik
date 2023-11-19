@@ -1,6 +1,8 @@
+import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/date_symbol_data_local.dart';
+import 'package:nour_enaik/controllers/controllers.dart';
 import 'package:nour_enaik/ui/screens/screens.dart';
 import 'package:sizer/sizer.dart';
 
@@ -11,19 +13,40 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await setupLocator();
   initializeDateFormatting();
+  AwesomeNotifications().initialize(
+      'resource://drawable/notification',
+      [
+        NotificationChannel(
+            channelKey: 'alarm key',
+            channelName: 'alarm channel',
+            channelDescription: 'Notifications for Alarm',
+            playSound: true,
+            enableVibration: true,
+            channelShowBadge: true)
+      ],
+      languageCode: 'ar');
+
+  AwesomeNotifications().setListeners(
+      onNotificationDisplayedMethod:
+          DosingSchedulesController.onNotificationDisplayedMethod,
+      onActionReceivedMethod: DosingSchedulesController.onActionReceivedMethod,
+      onNotificationCreatedMethod:
+          DosingSchedulesController.onNotificationCreatedMethod);
 
   runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
-
+  static final GlobalKey<NavigatorState> navigatorKey =
+      GlobalKey<NavigatorState>();
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return Sizer(
       builder: (context, orientation, deviceType) {
         return GetMaterialApp(
+          navigatorKey: navigatorKey,
           title: AppStrings.kAppName,
           textDirection: TextDirection.rtl,
           debugShowCheckedModeBanner: false,

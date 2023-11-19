@@ -25,92 +25,95 @@ class DosingSchedulesScreen extends StatelessWidget {
               bottom: 3.h,
               child: Image.asset(AppAssets.kLogoNourEnaik),
             ),
-            SingleChildScrollView(
-              child: Column(
-                children: [
-                  EmptyCard(
-                    color: Colors.transparent,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        GestureDetector(
-                          onTap: () {
-                            controller.selectedIndex = null;
-                            Get.to(AddNewDosingScreen());
-                          },
-                          child: Icon(
-                            Icons.add,
-                            size: 25.sp,
-                            color: Colors.white,
-                          ),
-                        ),
-                        Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 2.5.w),
-                          child: Text(
-                            'تسجيل الجرعة',
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 19.sp,
-                                fontWeight: FontWeight.bold),
-                          ),
-                        ),
-                        GestureDetector(
-                          onTap: () => Get.to(DrawerScreen()),
-                          child: Icon(
-                            Icons.menu,
-                            size: 25.sp,
-                            color: Colors.white,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  Row(
+            Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                EmptyCard(
+                  height: 10.h,
+                  color: Colors.transparent,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      SizedBox(width: 5.w),
-                      Text(
-                        'ضبط تلقائي',
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 19.sp,
-                            fontWeight: FontWeight.bold),
+                      GestureDetector(
+                        onTap: () {
+                          controller.selectedIndex = null;
+                          Get.to(AddNewDosingScreen());
+                        },
+                        child: Icon(
+                          Icons.add,
+                          size: 25.sp,
+                          color: Colors.white,
+                        ),
                       ),
                       Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 4.w),
-                        child: FlutterSwitch(
-                          width: 14.w,
-                          height: 3.25.h,
-                          valueFontSize: 9.sp,
-                          toggleSize: 10.sp,
-                          value: controller.generalStatus.value,
-                          borderRadius: 30.0,
-                          padding: 8.0,
-                          showOnOff: true,
-                          onToggle: controller.changeGeneralStatus,
+                        padding: EdgeInsets.symmetric(horizontal: 2.5.w),
+                        child: Text(
+                          'تسجيل الجرعة',
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 19.sp,
+                              fontWeight: FontWeight.bold),
                         ),
                       ),
-                      const Spacer(),
+                      GestureDetector(
+                        onTap: () => Get.to(DrawerScreen()),
+                        child: Icon(
+                          Icons.menu,
+                          size: 25.sp,
+                          color: Colors.white,
+                        ),
+                      ),
                     ],
                   ),
-                  GetBuilder<DosingSchedulesController>(
-                    builder: (controller) => SizedBox(
-                      height: 60.h,
-                      child: ListView.builder(
-                          itemCount: controller.dosesList.length,
-                          shrinkWrap: true,
-                          itemBuilder: (context, index) {
-                            return SchedulesItem(
-                              model: controller.dosesList[index],
-                              changeStatus: (value) =>
-                                  controller.changeStatus(index, value),
-                              updateDoes: (value) =>
-                                  controller.updateOrDeleteDoes(index, value),
-                            );
-                          }),
+                ),
+                Row(
+                  children: [
+                    SizedBox(
+                      width: 5.w,
+                    ),
+                    Text(
+                      'ضبط تلقائي',
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 19.sp,
+                          fontWeight: FontWeight.bold),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 4.w),
+                      child: FlutterSwitch(
+                        width: 14.w,
+                        height: 3.25.h,
+                        valueFontSize: 9.sp,
+                        toggleSize: 10.sp,
+                        value: controller.generalStatus.value,
+                        borderRadius: 30.0,
+                        padding: 8.0,
+                        showOnOff: true,
+                        onToggle: controller.changeGeneralStatus,
+                      ),
+                    ),
+                    const Spacer(),
+                  ],
+                ),
+                GetBuilder<DosingSchedulesController>(
+                  builder: (controller) => Expanded(
+                    child: ListView.builder(
+                      padding: EdgeInsets.zero,
+                      itemCount: controller.dosesList.length,
+                      itemBuilder: (context, index) {
+                        return SchedulesItem(
+                          model: controller.dosesList[index],
+                          changeStatus: (value) =>
+                              controller.changeSelectedDoseStatus(index, value),
+                          updateDoes: (value) =>
+                              controller.updateOrDeleteDoes(index, value),
+                        );
+                      },
                     ),
                   ),
-                ],
-              ),
+                ),
+                SizedBox(height: 5.h),
+              ],
             ),
           ],
         ),

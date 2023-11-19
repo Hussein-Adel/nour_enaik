@@ -7,7 +7,7 @@ import '../components/bottom_navigator.dart';
 
 class MainScreen extends StatelessWidget {
   MainScreen({Key? key}) : super(key: key);
-  final MainScreenController controller = Get.put(MainScreenController());
+  final MainController controller = Get.put(MainController());
 
   @override
   Widget build(BuildContext context) {
@@ -20,8 +20,7 @@ class MainScreen extends StatelessWidget {
             extendBody: true,
             backgroundColor: AppColors.liteWight,
             bottomNavigationBar: BottomNavigator(
-              onChanged: (index) =>
-                  controller.onBottomSheetChanged(index, context),
+              onChanged: (index) => controller.onBottomSheetChanged(index),
               index: controller.currentIndex.value,
             ),
             body: controller.homeScreensList[controller.currentIndex.value]),
