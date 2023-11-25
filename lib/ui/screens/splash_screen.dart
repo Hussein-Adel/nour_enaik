@@ -71,8 +71,9 @@ class _SplashScreenState extends State<SplashScreen>
           if (authController.isLoggedIn) {
             DosingSchedulesController dosingSchedulesController =
                 Get.put(DosingSchedulesController());
-            dosingSchedulesController.dosesList.value =
+            dosingSchedulesController.alarmsList.value =
                 await _sqlDb.getAlarmsFromDataBase();
+
             Get.off(MainScreen());
           } else {
             Get.off(const WelcomeScreen());

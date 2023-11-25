@@ -61,7 +61,7 @@ class NourEnaikLoginScreen extends StatelessWidget {
                         height: 2.5.h,
                       ),
                       Text(
-                        " ! " 'أهلا بعودتك',
+                        'أهلا بعودتك' " ! ",
                         style: TextStyle(
                             color: AppColors.darkGray,
                             fontSize: AppFontSizes.kS4),

@@ -9,17 +9,20 @@ class ZoneCard extends StatelessWidget {
   const ZoneCard(
       {Key? key,
       required this.tittle,
-      this.timeController,
+      this.time12HController,
       this.contentsColor,
-      this.onSaved})
+      this.onSaved,
+      this.time24HController})
       : super(key: key);
   final String tittle;
   final Color? contentsColor;
   final Function(DateTime?)? onSaved;
-  final TextEditingController? timeController;
+  final TextEditingController? time12HController;
+  final TextEditingController? time24HController;
 
   @override
   Widget build(BuildContext context) {
+    var timeNow = DateTime.now();
     return Container(
       margin: EdgeInsets.symmetric(vertical: 1.5.h),
       padding: EdgeInsets.symmetric(horizontal: 2.5.w, vertical: 1.5.h),
@@ -49,18 +52,28 @@ class ZoneCard extends StatelessWidget {
             verticalMargin: 0,
             child: TextFormFieldBuilder(
               isEnabled: false,
-              controller: timeController,
+              controller: time12HController,
               onTap: () async {
                 TimeOfDay? timeOfDay = await showTimePicker(
-                  context: context,
-                  initialTime: TimeOfDay.now(),
-                );
+                    context: context, initialTime: TimeOfDay.now());
                 if (timeOfDay != null) {
-                  var timeNow = DateTime.now();
-                  DateTime dateTime = DateTime(timeNow.year, timeNow.month,
-                      timeNow.day, timeOfDay.hour, timeOfDay.minute);
-                  var dateFormat = DateFormat.Hm('en').format(dateTime);
-                  timeController!.text = dateFormat.toString();
+                  DateTime dateTime12H;
+                  DateTime dateTime24H;
+                  if (timeOfDay.hour > 12) {
+                    dateTime12H = DateTime(timeNow.year, timeNow.month,
+                        timeNow.day, timeOfDay.hour - 12, timeOfDay.minute);
+                    dateTime24H = DateTime(timeNow.year, timeNow.month,
+                        timeNow.day, timeOfDay.hour, timeOfDay.minute);
+                  } else {
+                    dateTime12H = DateTime(timeNow.year, timeNow.month,
+                        timeNow.day, timeOfDay.hour, timeOfDay.minute);
+                    dateTime24H = DateTime(timeNow.year, timeNow.month,
+                        timeNow.day, timeOfDay.hour + 12, timeOfDay.minute);
+                  }
+                  time12HController!.text =
+                      DateFormat.Hm('en').format(dateTime12H);
+                  time24HController!.text =
+                      DateFormat.Hm('en').format(dateTime24H);
                 }
               },
             ),

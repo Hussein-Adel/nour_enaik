@@ -7,6 +7,8 @@ class AppAssets {
   static const kMagalEl2bsar = '$kAssets/magal-el2bsar.png';
   static const kLogoNourEnaik = '$kAssets/logo_nour_enaik.png';
   static const kMedicine = '$kAssets/medicine.png';
+  static const kBrintimo = '$kAssets/brintimo.png';
+  static const kAlfabrimo = '$kAssets/alfabrimo.png';
   static const kEyeImage = '$kAssets/eye_image.png';
   static const kWelcomePage1 = '$kAssets/welcome_page_1.png';
   static const kWelcomePage2 = '$kAssets/welcome_page_2.png';

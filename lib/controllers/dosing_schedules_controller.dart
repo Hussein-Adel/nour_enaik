@@ -8,144 +8,187 @@ import '../data/sqldb/sqldb.dart';
 import '../ui/screens/add_new_dosing_screen.dart';
 
 class DosingSchedulesController extends GetxController {
-  TextEditingController timeController = TextEditingController(text: '12:00');
+  var timeNow = DateTime.now();
+  // integer that add to alarmId to set alarm in 24H
+  int alarmIdIn24H = 1000;
+  TextEditingController time12HController = TextEditingController(
+      text:
+          '${DateTime.now().hour > 12 ? (DateTime.now().hour - 12).toString() : DateTime.now().hour.toString()}:${DateTime.now().minute}');
+  TextEditingController time24HController = TextEditingController(
+      text:
+          '${DateTime.now().hour > 12 ? DateTime.now().hour.toString() : (DateTime.now().hour + 12).toString()}:${DateTime.now().minute}');
   final GlobalKey<FormState> formDoseKey = GlobalKey<FormState>();
   TextEditingController treatmentNameController =
-      TextEditingController(text: 'دواء 1');
+      TextEditingController(text: 'Alfabrimo');
+  String treatmentImage = AppAssets.kAlfabrimo;
   final SqlDb _sqlDb = SqlDb();
 
   RxInt? selectedIndex = 0.obs;
   RxBool showFiled = false.obs;
   RxBool generalStatus = false.obs;
-  RxBool newDoseStatus = false.obs;
-  RxList<DoseModel> dosesList = <DoseModel>[].obs;
+  RxBool newDoseStatus = true.obs;
+  RxList<AlarmModel> alarmsList = <AlarmModel>[].obs;
   RxList<DoseModel> dropDownDosesList = <DoseModel>[
-    DoseModel(
-        treatmentName: 'دواء 1', doseTime: '12:00 Am', doseStatus: false.obs),
-    DoseModel(
-        treatmentName: 'دواء 2', doseTime: '12:00 Am', doseStatus: true.obs),
-    DoseModel(
-        treatmentName: 'دواء 3', doseTime: '12:00 Am', doseStatus: true.obs),
-    DoseModel(
-        treatmentName: 'دواء 4', doseTime: '12:00 Am', doseStatus: false.obs),
-    DoseModel(
-        treatmentName: 'أخرى', doseTime: '12:00 Am', doseStatus: false.obs),
+    DoseModel(treatmentName: 'Alfabrimo', treatmentImage: AppAssets.kAlfabrimo),
+    DoseModel(treatmentName: 'Brintimo', treatmentImage: AppAssets.kBrintimo),
+    DoseModel(treatmentName: 'أخرى', treatmentImage: AppAssets.kMedicine),
   ].obs;
 
   choseDose(DoseModel value) {
     if (dropDownDosesList.last == value) {
       treatmentNameController.text = value.treatmentName!;
+      treatmentImage = AppAssets.kAlfabrimo;
       showFiled.value = true;
     } else {
       treatmentNameController.text = value.treatmentName!;
+      treatmentImage = value.treatmentImage!;
       showFiled.value = false;
     }
   }
 
   void changeGeneralStatus(bool status) {
     generalStatus.value = status;
+    for (int i = 0; i < alarmsList.length; i++) {
+      changeSelectedAlarmStatus(index: i, status: status);
+    }
   }
 
   changeNewDoseStatus(bool? status) {
     newDoseStatus.value = status ?? false;
   }
 
-  changeSelectedDoseStatus(int index, bool status) {
-    dosesList[index].doseStatus?.value = status;
-    DoseModel dose = dosesList[index];
-    _sqlDb.updateAlarmIntoDataBase(dose);
+  //update ScheduleNotification Status
+  changeSelectedAlarmStatus({required int index, required bool status}) {
+    alarmsList[index].doseStatus?.value = status;
+    AlarmModel alarm = alarmsList[index];
+    _sqlDb.updateAlarmIntoDataBase(alarm);
     if (status) {
-      AwesomeNotifications().createNotification(
-          content: NotificationContent(
-              id: dose.id ?? 0,
-              channelKey: 'alarm key',
-              title: 'منبة الجرعة',
-              body: dose.treatmentName,
-              summary: dose.doseTime,
-              category: NotificationCategory.Alarm,
-              bigPicture: "asset://${AppAssets.kMedicine}",
-              wakeUpScreen: true,
-              criticalAlert: true,
-              notificationLayout: NotificationLayout.BigPicture,
-              actionType: ActionType.SilentAction),
-          schedule: NotificationCalendar(
-            hour: int.parse(dose.doseTime!.split(':').first),
-            minute: int.parse(dose.doseTime!.split(':').last),
-            preciseAlarm: true,
-            allowWhileIdle: true,
-          ));
+      createScheduleNotification(alarm: alarmsList[index]);
     } else {
-      AwesomeNotifications().cancelSchedule(dosesList[index].id!);
+      cancelScheduleNotification(index: index);
     }
     update();
   }
 
-  updateOrDeleteDoes(int index, String status) {
-    if (status == UpdateDoes.delete.name) {
-      // delete alarm from database and list
-      _sqlDb.deleteAlarmFromDataBase(dosesList[index].id ?? 0);
-      dosesList.removeAt(index);
-    } else {
-      treatmentNameController.text = dropDownDosesList[0].treatmentName!;
-      timeController.text = dosesList[index].doseTime!;
-      newDoseStatus = dosesList[index].doseStatus!;
-      selectedIndex = index.obs;
-      Get.to(AddNewDosingScreen());
-    }
-    update();
+  //cancel ScheduleNotification
+  cancelScheduleNotification({required int index}) {
+    AwesomeNotifications().cancelSchedule(alarmsList[index].id!);
+    // cancelSchedule in 24H
+    AwesomeNotifications().cancelSchedule(alarmsList[index].id! + alarmIdIn24H);
   }
 
-  addDose() async {
-    await AwesomeNotifications().requestPermissionToSendNotifications();
-    if (formDoseKey.currentState?.validate() != true) return false;
-    // record dose to use it to set it an database
-    DoseModel dose = DoseModel(
-        treatmentName: treatmentNameController.text,
-        doseTime: timeController.text,
-        doseStatus: newDoseStatus);
-    //update dose if user chose dose to update
-    if (selectedIndex != null) {
-      dosesList[selectedIndex!.value] = dose;
-      _sqlDb.updateAlarmIntoDataBase(dose);
-    }
-    // add new dose
-    else {
-      dosesList.add(
-        dose,
-      );
-    }
-    selectedIndex = null;
-
-    _sqlDb.addAlarmToDataBase(
-      dose: dose,
-    );
-
-    //get all Alarms to set id of each alarm to Use it later in delete or update
-    dosesList.value.clear();
-    dosesList.value = await _sqlDb.getAlarmsFromDataBase();
-
-    // create Notifications with schedule
+  // create ScheduleNotification
+  createScheduleNotification({required AlarmModel alarm}) {
+    // add first alarm in 12H
     AwesomeNotifications().createNotification(
         content: NotificationContent(
-            id: dosesList.last.id ?? 0,
+            id: alarm.id ?? 0,
             channelKey: 'alarm key',
             title: 'منبة الجرعة',
-            body: dosesList.last.treatmentName,
-            summary: dosesList.last.doseTime,
+            body: alarm.treatmentName,
+            summary: alarm.doseTime12H,
             category: NotificationCategory.Alarm,
-            bigPicture: "asset://${AppAssets.kMedicine}",
+            bigPicture: "asset://${alarm.treatmentImage}",
             wakeUpScreen: true,
             criticalAlert: true,
             notificationLayout: NotificationLayout.BigPicture,
             actionType: ActionType.SilentAction),
         schedule: NotificationCalendar(
-          hour: int.parse(timeController.text.split(':').first),
-          minute: int.parse(timeController.text.split(':').last),
+          hour: int.parse(alarm.doseTime12H!.split(':').first),
+          minute: int.parse(alarm.doseTime12H!.split(':').last),
           preciseAlarm: true,
           allowWhileIdle: true,
         ));
+    // add first alarm in 24H
+    AwesomeNotifications().createNotification(
+        content: NotificationContent(
+            id: alarm.id ?? 0,
+            channelKey: 'alarm key',
+            title: 'منبة الجرعة',
+            body: alarm.treatmentName,
+            summary: alarm.doseTime24H,
+            category: NotificationCategory.Alarm,
+            bigPicture: "asset://${alarm.treatmentImage}",
+            wakeUpScreen: true,
+            criticalAlert: true,
+            notificationLayout: NotificationLayout.BigPicture,
+            actionType: ActionType.SilentAction),
+        schedule: NotificationCalendar(
+          hour: int.parse(alarm.doseTime24H!.split(':').first),
+          minute: int.parse(alarm.doseTime24H!.split(':').last),
+          preciseAlarm: true,
+          allowWhileIdle: true,
+        ));
+  }
+
+  // Select Alarm and set Data To Update Alarm
+  selectAlarmToUpdate(int index) {
+    treatmentNameController.text = alarmsList[index].treatmentName ?? '';
+    treatmentImage = alarmsList[index].treatmentImage!;
+    time12HController.text = alarmsList[index].doseTime12H!;
+    time24HController.text = alarmsList[index].doseTime24H!;
+    newDoseStatus = alarmsList[index].doseStatus!;
+    selectedIndex = index.obs;
+    Get.to(AddNewDosingScreen());
+  }
+
+  //update Alarm if user chose dose to update
+  updateAlarm() async {
+    cancelScheduleNotification(index: selectedIndex!.value);
+    // record alarm to use it to update it an database
+    AlarmModel alarm = AlarmModel(
+        id: alarmsList[selectedIndex!.value].id,
+        treatmentName: treatmentNameController.text,
+        treatmentImage: treatmentImage,
+        doseTime12H: time12HController.text,
+        doseTime24H: time24HController.text,
+        doseStatus: newDoseStatus);
+
+    // update alarm in alarmList
+    alarmsList[selectedIndex!.value] = alarm;
+    // update alarm in SqlDataBase
+    // await _sqlDb.deleteAlarmFromDataBase(alarm.id);
+    await _sqlDb.updateAlarmIntoDataBase(alarm);
+    // reset selectedIndex
+    selectedIndex = null;
+
+    // create Notifications with schedule
+    createScheduleNotification(alarm: alarm);
+    Get.back();
+  }
+
+  //add Alarm
+  addAlarm() async {
+    await AwesomeNotifications().requestPermissionToSendNotifications();
+    if (formDoseKey.currentState?.validate() != true) return false;
+    // record alarm to use it to set it an database
+    AlarmModel alarm = AlarmModel(
+        treatmentName: treatmentNameController.text,
+        treatmentImage: treatmentImage,
+        doseTime12H: time12HController.text,
+        doseTime24H: time24HController.text,
+        doseStatus: newDoseStatus);
+    // add alarm to Database
+    _sqlDb.addAlarmToDataBase(alarm: alarm);
+    // get all alarms after set id to each one of them and set all in list
+    alarmsList.value
+      ..clear()
+      ..addAll(await _sqlDb.getAlarmsFromDataBase());
+    // create Notifications with schedule
+    createScheduleNotification(alarm: alarmsList.last);
+
     update();
     Get.back();
+  }
+
+  //delete Alarm from NotificationsSchedule , SqlDatabase , AlarmList
+  deleteAlarm(int index) {
+    //cancelNotification
+    cancelScheduleNotification(index: index);
+    // delete alarm from database and list
+    _sqlDb.deleteAlarmFromDataBase(alarmsList[index].id ?? 0);
+    alarmsList.removeAt(index);
+    update();
   }
 
   /// Use this method to detect when a new notification or a schedule is created
@@ -176,15 +219,26 @@ class DosingSchedulesController extends GetxController {
   }
 }
 
-class DoseModel {
+class AlarmModel {
   int? id;
   String? treatmentName;
-  String? doseTime;
+  String? treatmentImage;
+  String? doseTime12H;
+  String? doseTime24H;
   RxBool? doseStatus;
-  DoseModel({
+  AlarmModel({
     this.id,
     this.treatmentName,
-    this.doseTime,
+    this.treatmentImage,
+    this.doseTime12H,
+    this.doseTime24H,
     this.doseStatus,
   });
+}
+
+class DoseModel {
+  String? treatmentName;
+  String? treatmentImage;
+
+  DoseModel({this.treatmentName, this.treatmentImage});
 }

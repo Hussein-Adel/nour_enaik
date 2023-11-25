@@ -68,7 +68,8 @@ class AddNewDosingScreen extends StatelessWidget {
                   width: 100.w,
                   child: ZoneCard(
                     tittle: 'ميعاد الجرعة',
-                    timeController: controller.timeController,
+                    time24HController: controller.time24HController,
+                    time12HController: controller.time12HController,
                   ),
                 ),
                 Row(
@@ -90,7 +91,9 @@ class AddNewDosingScreen extends StatelessWidget {
                 SizedBox(height: 2.5.h),
                 GestureDetector(
                   onTap: () {
-                    controller.addDose();
+                    controller.selectedIndex == null
+                        ? controller.addAlarm()
+                        : controller.updateAlarm();
                   },
                   child: EmptyCard(
                     verticalPadding: 0,

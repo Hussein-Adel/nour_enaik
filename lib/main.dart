@@ -22,6 +22,13 @@ void main() async {
             channelDescription: 'Notifications for Alarm',
             playSound: true,
             enableVibration: true,
+            channelShowBadge: true),
+        NotificationChannel(
+            channelKey: 'delay key',
+            channelName: 'delay channel',
+            channelDescription: 'Notifications for Alarm',
+            playSound: true,
+            enableVibration: true,
             channelShowBadge: true)
       ],
       languageCode: 'ar');

@@ -99,14 +99,18 @@ class DosingSchedulesScreen extends StatelessWidget {
                   builder: (controller) => Expanded(
                     child: ListView.builder(
                       padding: EdgeInsets.zero,
-                      itemCount: controller.dosesList.length,
+                      itemCount: controller.alarmsList.length,
                       itemBuilder: (context, index) {
                         return SchedulesItem(
-                          model: controller.dosesList[index],
+                          model: controller.alarmsList[index],
                           changeStatus: (value) =>
-                              controller.changeSelectedDoseStatus(index, value),
-                          updateDoes: (value) =>
-                              controller.updateOrDeleteDoes(index, value),
+                              controller.changeSelectedAlarmStatus(
+                                  index: index, status: value),
+                          updateDoes: (value) {
+                            value == "edite"
+                                ? controller.selectAlarmToUpdate(index)
+                                : controller.deleteAlarm(index);
+                          },
                         );
                       },
                     ),
@@ -128,7 +132,7 @@ class SchedulesItem extends StatelessWidget {
       required this.model,
       required this.changeStatus,
       required this.updateDoes});
-  final DoseModel model;
+  final AlarmModel model;
   final Function(bool) changeStatus;
   final Function(String) updateDoes;
   @override
@@ -139,15 +143,15 @@ class SchedulesItem extends StatelessWidget {
         children: [
           PopupMenuButton(
             onSelected: updateDoes,
-            itemBuilder: (BuildContext bc) {
+            itemBuilder: (BuildContext context) {
               return const [
                 PopupMenuItem(
-                  child: Text("تعديل"),
                   value: 'edite',
+                  child: Text("تعديل"),
                 ),
                 PopupMenuItem(
-                  child: Text("حذف"),
                   value: 'delete',
+                  child: Text("حذف"),
                 ),
               ];
             },
@@ -161,7 +165,7 @@ class SchedulesItem extends StatelessWidget {
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 2.5.w),
             child: Text(
-              model.doseTime ?? '',
+              model.doseTime12H ?? '',
               style: TextStyle(color: Colors.white, fontSize: 13.5.sp),
             ),
           ),

@@ -33,7 +33,10 @@ class AlarmScreen extends StatelessWidget {
                 ),
                 SizedBox(width: 12.5.w),
                 GestureDetector(
-                  onTap: () => Get.back(),
+                  onTap: () {
+                    controller.stopAlarm();
+                    controller.onBottomSheetChanged(2);
+                  },
                   child: Icon(
                     Icons.arrow_forward,
                     color: Colors.white,
@@ -57,7 +60,7 @@ class AlarmScreen extends StatelessWidget {
                     children: [
                       SizedBox(height: 2.5.h),
                       Image.asset(
-                        AppAssets.kMedicine,
+                        controller.notificationImage.value,
                         height: 55.h,
                       ),
                     ],
@@ -119,7 +122,7 @@ class AlarmScreen extends StatelessWidget {
                   children: [
                     ButtonBuilder(
                       title: 'تأجيل',
-                      onPressed: () => controller.stopAlarm(),
+                      onPressed: () => controller.delayAlarm(),
                       height: 4.5.h,
                       width: 30.w,
                       titleColor: AppColors.white,
