@@ -31,6 +31,10 @@ class DosingSchedulesController extends GetxController {
   RxList<DoseModel> dropDownDosesList = <DoseModel>[
     DoseModel(treatmentName: 'Alfabrimo', treatmentImage: AppAssets.kAlfabrimo),
     DoseModel(treatmentName: 'Brintimo', treatmentImage: AppAssets.kBrintimo),
+    DoseModel(
+        treatmentName: 'Brimobrinz', treatmentImage: AppAssets.kBrimobrinz),
+    DoseModel(
+        treatmentName: 'Dorzolamol', treatmentImage: AppAssets.kDorzolamol),
     DoseModel(treatmentName: 'أخرى', treatmentImage: AppAssets.kMedicine),
   ].obs;
 
